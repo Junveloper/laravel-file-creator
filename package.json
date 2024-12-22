@@ -35,6 +35,11 @@
         "title": "Create Model"
       },
       {
+        "command": "laravelFileCreator.createMigration",
+        "category": "Laravel File Creator",
+        "title": "Create Migration"
+      },
+      {
         "command": "laravelFileCreator.createLaravelFile",
         "category": "Laravel File Creator",
         "title": "Create Laravel File"
@@ -70,9 +75,14 @@
           "group": "1_laravelFileCreator@3"
         },
         {
+          "command": "laravelFileCreator.createMigration",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateMigration",
+          "group": "1_laravelFileCreator@4"
+        },
+        {
           "command": "laravelFileCreator.createLaravelFile",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "1_laravelFileCreator@4"
+          "group": "2_laravelFileCreator@4"
         }
       ]
     },
@@ -94,6 +104,11 @@
           "type": "boolean",
           "default": true,
           "description": "Show in the 'New Laravel file...' menu to create a model"
+        },
+        "laravelFileCreator.showCreateMigration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show in the 'New Laravel file...' menu to create a migration"
         }
       }
     }

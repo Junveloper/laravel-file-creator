@@ -21,7 +21,6 @@ export function activate(context: vscode.ExtensionContext) {
         folder = folder[0];
       }
 
-      // Display a Quick Pick menu to select file type
       const fileType = await vscode.window.showQuickPick(
         [
           {
@@ -30,15 +29,15 @@ export function activate(context: vscode.ExtensionContext) {
           },
           { label: "Form Request", value: LaravelFileTypes.FormRequest },
           { label: "Model", value: LaravelFileTypes.Model },
+          { label: "Migration", value: LaravelFileTypes.Migration },
         ],
         { placeHolder: "Select the type of file to create" }
       );
 
       if (!fileType) {
-        return; // Exit if the user cancels the Quick Pick
+        return;
       }
 
-      // Call the createFile method with the selected type
       creator.createFile(fileType.value, folder);
     }
   );
@@ -59,10 +58,17 @@ export function activate(context: vscode.ExtensionContext) {
     (folder) => creator.createFile(LaravelFileTypes.Model, folder)
   );
 
-  context.subscriptions.push(createLaravelFile);
+  const createMigration = vscode.commands.registerCommand(
+    "laravelFileCreator.createMigration",
+    (folder) => creator.createFile(LaravelFileTypes.Migration, folder)
+  );
+
   context.subscriptions.push(createSingleActionController);
   context.subscriptions.push(createFormRequest);
   context.subscriptions.push(createModel);
+  context.subscriptions.push(createMigration);
+
+  context.subscriptions.push(createLaravelFile);
 
   vscode.commands.executeCommand(
     "setContext",

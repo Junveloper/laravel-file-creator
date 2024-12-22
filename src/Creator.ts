@@ -7,7 +7,31 @@ export enum LaravelFileTypes {
   SingleActionController = "Single Action Controller",
   FormRequest = "Form Request",
   Model = "Model",
+  Migration = "Migration",
 }
+
+const inputBoxMapping: Record<LaravelFileTypes, vscode.InputBoxOptions> = {
+  [LaravelFileTypes.SingleActionController]: {
+    title: "New Single Action Controller",
+    placeHolder: "Controller Name",
+    prompt: "Name of Single Action Controller",
+  },
+  [LaravelFileTypes.FormRequest]: {
+    title: "New Form Request",
+    placeHolder: "Form Request Name",
+    prompt: "Name of Form Request",
+  },
+  [LaravelFileTypes.Model]: {
+    title: "New Model",
+    placeHolder: "Model Name",
+    prompt: "Name of Model",
+  },
+  [LaravelFileTypes.Migration]: {
+    title: "New Migration",
+    placeHolder: "Migration Name",
+    prompt: "Name of Migration (use snake case)",
+  },
+};
 
 export default class Creator {
   readonly msgFileExists = "File already exists!";
@@ -28,11 +52,7 @@ export default class Creator {
       folder = askedFolder[0];
     }
 
-    let name = await vscode.window.showInputBox({
-      title: "New " + this.capitalize(type),
-      placeHolder: "Name",
-      prompt: "Name of " + type,
-    });
+    let name = await vscode.window.showInputBox(inputBoxMapping[type]);
 
     if (!name) {
       return;
@@ -40,15 +60,22 @@ export default class Creator {
 
     name = name.replace(/\s+/g, "");
 
-    name = this.capitalize(name);
-
     if (name.includes(".")) {
       name = name.split(".")[0];
     }
 
-    let namespaceResolver: NamespaceResolver = new NamespaceResolver();
+    if (type === LaravelFileTypes.Migration) {
+      const now = new Date();
+      const dateString = now
+        .toISOString()
+        .replace(/[-T]/g, "_")
+        .replace(/:/g, "")
+        .slice(0, -5);
 
-    let namespace = await namespaceResolver.resolve(folder.fsPath);
+      name = `${dateString}_${name}`;
+    } else {
+      name = this.capitalize(name);
+    }
 
     switch (type) {
       case LaravelFileTypes.SingleActionController:
@@ -63,7 +90,13 @@ export default class Creator {
         break;
       case LaravelFileTypes.Model:
         break;
+      default:
+        break;
     }
+
+    let namespaceResolver: NamespaceResolver = new NamespaceResolver();
+
+    let namespace = await namespaceResolver.resolve(folder.fsPath);
 
     let filename = name + ".php";
 
@@ -150,6 +183,19 @@ export default class Creator {
         content += "\n";
         content += "}\n";
         break;
+      case LaravelFileTypes.Migration:
+        content += "use Illuminate\\Database\\Migrations\\Migration;";
+        content += "use Illuminate\\Database\\Schema\\Blueprint;";
+        content += "use Illuminate\\Support\\Facades\\Schema;";
+        content += "\n";
+        content += "\n";
+        content += "return new class extends Migration {\n";
+        content += "    public function up():void\n";
+        content += "    {\n";
+        content += "        Schema::table('', function (Blueprint $table) {\n";
+        content += "        });\n";
+        content += "    }\n";
+        content += "};\n";
     }
 
     fs.writeFileSync(filename, content);
