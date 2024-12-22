@@ -33,6 +33,11 @@
         "command": "laravelFileCreator.createModel",
         "category": "Laravel File Creator",
         "title": "Create Model"
+      },
+      {
+        "command": "laravelFileCreator.createLaravelFile",
+        "category": "Laravel File Creator",
+        "title": "Create Laravel File"
       }
     ],
     "submenus": [
@@ -63,6 +68,11 @@
           "command": "laravelFileCreator.createModel",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
           "group": "1_laravelFileCreator@3"
+        },
+        {
+          "command": "laravelFileCreator.createLaravelFile",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "group": "1_laravelFileCreator@4"
         }
       ]
     }
