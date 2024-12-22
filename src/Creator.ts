@@ -38,16 +38,34 @@ export default class Creator {
       return;
     }
 
+    name = name.replace(/\s+/g, "");
+
+    name = this.capitalize(name);
+
+    if (name.includes(".")) {
+      name = name.split(".")[0];
+    }
+
     let namespaceResolver: NamespaceResolver = new NamespaceResolver();
 
     let namespace = await namespaceResolver.resolve(folder.fsPath);
 
-    let filename = name.endsWith(".php") ? name : name + ".php";
-
-    let spaceIndex: number = filename.indexOf(" ");
-    if (spaceIndex > 0) {
-      filename = filename.substring(0, spaceIndex) + ".php";
+    switch (type) {
+      case LaravelFileTypes.SingleActionController:
+        if (!name.endsWith("Controller")) {
+          name += "Controller";
+        }
+        break;
+      case LaravelFileTypes.FormRequest:
+        if (!name.endsWith("Request")) {
+          name += "Request";
+        }
+        break;
+      case LaravelFileTypes.Model:
+        break;
     }
+
+    let filename = name + ".php";
 
     let fullFilename = folder.fsPath + path.sep + filename;
 
@@ -85,10 +103,7 @@ export default class Creator {
     namespace: string | undefined,
     overwrite: boolean = false
   ): void {
-    console.log("here 1");
-
     if (fs.existsSync(filename) && !overwrite) {
-      console.log("here 2");
       vscode.window.showErrorMessage(this.msgFileExists);
       return;
     }
@@ -136,8 +151,6 @@ export default class Creator {
         content += "}\n";
         break;
     }
-
-    console.log("here 3");
 
     fs.writeFileSync(filename, content);
 
