@@ -1,23 +1,44 @@
 {
-  "name": "laraFiles",
-  "displayName": "LaraFiles",
-  "description": "",
+  "name": "vscode-laravel-file-creator",
+  "displayName": "Laravel File Creator",
+  "description": "A Visual Studio Code Extension to create Laravel files from context menu in file explorer",
   "version": "0.0.1",
+  "author": {
+    "name": "Jun Im",
+    "url": "https://github.com/junveloper"
+  },
   "engines": {
     "vscode": "^1.96.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "workspaceContains:**/composer.json"
+  ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+    "submenus": [
       {
-        "command": "laraFiles.laraWorld",
-        "title": "Lara World"
+        "id": "laravelFileCreator.menu",
+        "label": "New Laravel file..."
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "submenu": "laravelFileCreator.menu",
+          "group": "navigation@-1"
+        }
+      ],
+      "laravelFileCreator.menu": [
+        {
+          "command": "laravelFileCreator.createSingleActionController",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "group": "laravelFileCreator"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
