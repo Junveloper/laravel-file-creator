@@ -4,7 +4,7 @@ import NamespaceResolver from "./NamespaceResolver";
 import path = require("path");
 
 export enum LaravelFileTypes {
-  SingleActionController = "single-action-controller",
+  SingleActionController = "Single Action Controller",
 }
 
 export default class Creator {
@@ -27,7 +27,7 @@ export default class Creator {
     }
 
     let name = await vscode.window.showInputBox({
-      title: "New PHP " + this.capitalize(type),
+      title: "New " + this.capitalize(type),
       placeHolder: "Name",
       prompt: "Name of " + type,
     });
@@ -37,6 +37,7 @@ export default class Creator {
     }
 
     let namespaceResolver: NamespaceResolver = new NamespaceResolver();
+
     let namespace = await namespaceResolver.resolve(folder.fsPath);
 
     let filename = name.endsWith(".php") ? name : name + ".php";
@@ -51,7 +52,7 @@ export default class Creator {
     this.writeFile(type, name, fullFilename, namespace);
   }
 
-  public async generateCode(type: string) {
+  public async generateCode(type: LaravelFileTypes) {
     const currentFile = vscode.window.activeTextEditor?.document.fileName;
 
     if (!currentFile) {
@@ -82,7 +83,10 @@ export default class Creator {
     namespace: string | undefined,
     overwrite: boolean = false
   ): void {
+    console.log("here 1");
+
     if (fs.existsSync(filename) && !overwrite) {
+      console.log("here 2");
       vscode.window.showErrorMessage(this.msgFileExists);
       return;
     }
@@ -107,6 +111,8 @@ export default class Creator {
         content += "}\n";
         break;
     }
+
+    console.log("here 3");
 
     fs.writeFileSync(filename, content);
 

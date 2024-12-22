@@ -18,6 +18,13 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "laravelFileCreator.createSingleActionController",
+        "category": "Laravel File Creator",
+        "title": "Create Single Action Controller"
+      }
+    ],
     "submenus": [
       {
         "id": "laravelFileCreator.menu",
