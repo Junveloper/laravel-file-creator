@@ -6,6 +6,7 @@ import path = require("path");
 export enum LaravelFileTypes {
   SingleActionController = "Single Action Controller",
   FormRequest = "Form Request",
+  Model = "Model",
 }
 
 export default class Creator {
@@ -123,6 +124,15 @@ export default class Creator {
         content += "        //\n";
         content += "        ];\n";
         content += "    }\n";
+        content += "}\n";
+        break;
+      case LaravelFileTypes.Model:
+        content += "use Illuminate\\Database\\Eloquent\\Model;";
+        content += "\n";
+        content += "\n";
+        content += `class ${name} extends Model\n`;
+        content += "{\n";
+        content += "\n";
         content += "}\n";
         break;
     }

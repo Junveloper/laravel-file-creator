@@ -28,6 +28,11 @@
         "command": "laravelFileCreator.createFormRequest",
         "category": "Laravel File Creator",
         "title": "Create Form Request"
+      },
+      {
+        "command": "laravelFileCreator.createModel",
+        "category": "Laravel File Creator",
+        "title": "Create Model"
       }
     ],
     "submenus": [
@@ -47,12 +52,17 @@
         {
           "command": "laravelFileCreator.createSingleActionController",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "1_laravelFileCreator"
+          "group": "1_laravelFileCreator@1"
         },
         {
           "command": "laravelFileCreator.createFormRequest",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "2_laravelFileCreator"
+          "group": "1_laravelFileCreator@2"
+        },
+        {
+          "command": "laravelFileCreator.createModel",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "group": "1_laravelFileCreator@3"
         }
       ]
     }
