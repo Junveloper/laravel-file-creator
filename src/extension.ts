@@ -6,15 +6,21 @@ import Creator, { LaravelFileTypes } from "./Creator";
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  let creator = new Creator();
+  const creator = new Creator();
 
-  let createSingleActionController = vscode.commands.registerCommand(
+  const createSingleActionController = vscode.commands.registerCommand(
     "laravelFileCreator.createSingleActionController",
     (folder) =>
       creator.createFile(LaravelFileTypes.SingleActionController, folder)
   );
 
+  const createFormRequest = vscode.commands.registerCommand(
+    "laravelFileCreator.createFormRequest",
+    (folder) => creator.createFile(LaravelFileTypes.FormRequest, folder)
+  );
+
   context.subscriptions.push(createSingleActionController);
+  context.subscriptions.push(createFormRequest);
 
   vscode.commands.executeCommand(
     "setContext",

@@ -112,16 +112,17 @@ export default class Creator {
         content += "}\n";
         break;
       case LaravelFileTypes.FormRequest:
-        content += "use IlluminateFoundationHttpFormRequest;";
+        content += "use Illuminate\\Foundation\\Http\\FormRequest;";
+        content += "\n";
         content += "\n";
         content += `class ${name}Request extends FormRequest\n`;
         content += "{\n";
-        content += "public function rules(): array\n";
-        content += "{\n";
-        content += "return [\n";
-        content += "//\n";
-        content += "];\n";
-        content += "}\n";
+        content += "    public function rules(): array\n";
+        content += "    {\n";
+        content += "        return [\n";
+        content += "        //\n";
+        content += "        ];\n";
+        content += "    }\n";
         content += "}\n";
         break;
     }

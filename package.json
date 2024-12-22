@@ -23,6 +23,11 @@
         "command": "laravelFileCreator.createSingleActionController",
         "category": "Laravel File Creator",
         "title": "Create Single Action Controller"
+      },
+      {
+        "command": "laravelFileCreator.createFormRequest",
+        "category": "Laravel File Creator",
+        "title": "Create Form Request"
       }
     ],
     "submenus": [
@@ -42,7 +47,12 @@
         {
           "command": "laravelFileCreator.createSingleActionController",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "laravelFileCreator"
+          "group": "1_laravelFileCreator"
+        },
+        {
+          "command": "laravelFileCreator.createFormRequest",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "group": "2_laravelFileCreator"
         }
       ]
     }
