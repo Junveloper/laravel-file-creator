@@ -5,6 +5,7 @@ import path = require("path");
 
 export enum LaravelFileTypes {
   SingleActionController = "Single Action Controller",
+  FormRequest = "Form Request",
 }
 
 export default class Creator {
@@ -108,6 +109,19 @@ export default class Creator {
         content += "    {\n";
         content += "        \n";
         content += "    }\n";
+        content += "}\n";
+        break;
+      case LaravelFileTypes.FormRequest:
+        content += "use IlluminateFoundationHttpFormRequest;";
+        content += "\n";
+        content += `class ${name}Request extends FormRequest\n`;
+        content += "{\n";
+        content += "public function rules(): array\n";
+        content += "{\n";
+        content += "return [\n";
+        content += "//\n";
+        content += "];\n";
+        content += "}\n";
         content += "}\n";
         break;
     }
