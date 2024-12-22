@@ -56,17 +56,17 @@
       "laravelFileCreator.menu": [
         {
           "command": "laravelFileCreator.createSingleActionController",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateSingleActionController",
           "group": "1_laravelFileCreator@1"
         },
         {
           "command": "laravelFileCreator.createFormRequest",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateFormRequest",
           "group": "1_laravelFileCreator@2"
         },
         {
           "command": "laravelFileCreator.createModel",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateModel",
           "group": "1_laravelFileCreator@3"
         },
         {
@@ -75,6 +75,27 @@
           "group": "1_laravelFileCreator@4"
         }
       ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Laravel File Creator",
+      "properties": {
+        "laravelFileCreator.showCreateSingleActionController": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show in the 'New Laravel file...' menu to create a single action controller"
+        },
+        "laravelFileCreator.showCreateFormRequest": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show in the 'New Laravel file...' menu to create a form request"
+        },
+        "laravelFileCreator.showCreateModel": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show in the 'New Laravel file...' menu to create a model"
+        }
+      }
     }
   },
   "scripts": {
