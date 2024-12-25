@@ -1,11 +1,9 @@
 import * as vscode from "vscode";
-import Creator, { LaravelFileTypes } from "./Creator";
 import createLaravelFile from "./LaravelFile";
+import { LaravelFileTypes } from "./LaravelFile/inputBoxMapping";
 import { promptFolderSelection } from "./Workspace";
 
 export function activate(context: vscode.ExtensionContext) {
-  const creator = new Creator();
-
   const createLaravelFileCommand = vscode.commands.registerCommand(
     "laravelFileCreator.createLaravelFile",
     async (folder?: vscode.Uri) => {
@@ -34,24 +32,24 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      creator.createFile(fileType.value, folder);
+      createLaravelFile(fileType.value, folder);
     }
   );
 
   const createSingleActionController = vscode.commands.registerCommand(
     "laravelFileCreator.createSingleActionController",
     (folder) =>
-      creator.createFile(LaravelFileTypes.SingleActionController, folder)
+      createLaravelFile(LaravelFileTypes.SingleActionController, folder)
   );
 
   const createFormRequest = vscode.commands.registerCommand(
     "laravelFileCreator.createFormRequest",
-    (folder) => creator.createFile(LaravelFileTypes.FormRequest, folder)
+    (folder) => createLaravelFile(LaravelFileTypes.FormRequest, folder)
   );
 
   const createModel = vscode.commands.registerCommand(
     "laravelFileCreator.createModel",
-    (folder) => creator.createFile(LaravelFileTypes.Model, folder)
+    (folder) => createLaravelFile(LaravelFileTypes.Model, folder)
   );
 
   const createMigration = vscode.commands.registerCommand(

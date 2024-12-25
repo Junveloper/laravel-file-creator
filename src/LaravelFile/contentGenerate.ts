@@ -5,28 +5,83 @@ export default function generateLaravelFile(
   className: string,
   namespace?: string
 ) {
-  if (type === LaravelFileTypes.Migration) {
-    return migrationCode();
+  const generators: Record<LaravelFileTypes, () => string> = {
+    [LaravelFileTypes.Migration]: () => migrationCode(),
+    [LaravelFileTypes.SingleActionController]: () =>
+      singleActionControllerCode(className, namespace),
+    [LaravelFileTypes.FormRequest]: () => formRequestCode(className, namespace),
+    [LaravelFileTypes.Model]: () => modelCode(className, namespace),
+  };
+
+  return generators[type]();
+}
+
+function singleActionControllerCode(className: string, namespace?: string) {
+  if (!className.endsWith("Controller")) {
+    className += "Controller";
   }
 
-  return "";
+  return `<?php
+
+${namespace ? `namespace ${namespace};` : ""}
+
+class ${className}
+{
+    public function __invoke()
+    {
+        
+    }
+}`;
+}
+
+function formRequestCode(className: string, namespace?: string) {
+  if (!className.endsWith("Request")) {
+    className += "Request";
+  }
+
+  return `<?php
+
+${namespace ? `namespace ${namespace};` : ""}
+
+use Illuminate\\Foundation\\Http\\FormRequest;
+
+class ${className} extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+        //
+        ];
+    }
+}`;
+}
+
+function modelCode(className: string, namespace?: string) {
+  return `<?php
+
+${namespace ? `namespace ${namespace};` : ""}
+
+use Illuminate\\Database\\Eloquent\\Model;
+
+class ${className} extends Model
+{
+
+}`;
 }
 
 function migrationCode() {
-  let content = "<?php\n\n";
+  return `<?php
 
-  content += "use Illuminate\\Database\\Migrations\\Migration;\n";
-  content += "use Illuminate\\Database\\Schema\\Blueprint;\n";
-  content += "use Illuminate\\Support\\Facades\\Schema;\n";
-  content += "\n";
-  content += "\n";
-  content += "return new class extends Migration {\n";
-  content += "    public function up():void\n";
-  content += "    {\n";
-  content += "        Schema::table('', function (Blueprint $table) {\n";
-  content += "        });\n";
-  content += "    }\n";
-  content += "};\n";
+use Illuminate\\Database\\Migrations\\Migration;
+use Illuminate\\Database\\Schema\\Blueprint;
+use Illuminate\\Support\\Facades\\Schema;
 
-  return content;
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::table('', function (Blueprint $table) {
+
+        });
+    }
+};`;
 }

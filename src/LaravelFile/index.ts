@@ -1,11 +1,10 @@
 import path from "path";
 import * as vscode from "vscode";
-import { LaravelFileTypes } from "../Creator";
 import { createFile, extractClassName, sanitizeFileName } from "../File";
 import resolveNamespace from "../Namespace";
 import { openTextDocument } from "../Workspace";
 import generateLaravelFile from "./contentGenerate";
-import { inputBoxMapping } from "./inputBoxMapping";
+import { inputBoxMapping, LaravelFileTypes } from "./inputBoxMapping";
 
 export default async function createLaravelFile(
   type: LaravelFileTypes,
