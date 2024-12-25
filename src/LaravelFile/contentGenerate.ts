@@ -15,9 +15,9 @@ export default function generateLaravelFile(
 function migrationCode() {
   let content = "<?php\n\n";
 
-  content += "use Illuminate\\Database\\Migrations\\Migration;";
-  content += "use Illuminate\\Database\\Schema\\Blueprint;";
-  content += "use Illuminate\\Support\\Facades\\Schema;";
+  content += "use Illuminate\\Database\\Migrations\\Migration;\n";
+  content += "use Illuminate\\Database\\Schema\\Blueprint;\n";
+  content += "use Illuminate\\Support\\Facades\\Schema;\n";
   content += "\n";
   content += "\n";
   content += "return new class extends Migration {\n";

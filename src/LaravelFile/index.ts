@@ -7,7 +7,10 @@ import { openTextDocument } from "../Workspace";
 import generateLaravelFile from "./contentGenerate";
 import { inputBoxMapping } from "./inputBoxMapping";
 
-async function createLaravelFile(type: LaravelFileTypes, folder: vscode.Uri) {
+export default async function createLaravelFile(
+  type: LaravelFileTypes,
+  folder: vscode.Uri
+) {
   let baseName = await getLaravelFileName(type);
 
   if (!baseName) {
@@ -17,7 +20,13 @@ async function createLaravelFile(type: LaravelFileTypes, folder: vscode.Uri) {
   baseName = sanitizeFileName(baseName);
 
   const className = extractClassName(baseName);
-  const namespace = await resolveNamespace(folder.fsPath);
+
+  let namespace;
+
+  if (type !== LaravelFileTypes.Migration) {
+    namespace = await resolveNamespace(folder.fsPath);
+  }
+
   const fileName = convertBasenameForType(type, baseName);
   const filePath = folder.fsPath + path.sep + fileName;
 

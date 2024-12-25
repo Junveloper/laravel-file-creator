@@ -1,11 +1,12 @@
 import * as vscode from "vscode";
 import Creator, { LaravelFileTypes } from "./Creator";
+import createLaravelFile from "./LaravelFile";
 import { promptFolderSelection } from "./Workspace";
 
 export function activate(context: vscode.ExtensionContext) {
   const creator = new Creator();
 
-  const createLaravelFile = vscode.commands.registerCommand(
+  const createLaravelFileCommand = vscode.commands.registerCommand(
     "laravelFileCreator.createLaravelFile",
     async (folder?: vscode.Uri) => {
       if (!folder) {
@@ -55,7 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const createMigration = vscode.commands.registerCommand(
     "laravelFileCreator.createMigration",
-    (folder) => creator.createFile(LaravelFileTypes.Migration, folder)
+    (folder) => createLaravelFile(LaravelFileTypes.Migration, folder)
   );
 
   context.subscriptions.push(createSingleActionController);
@@ -63,7 +64,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(createModel);
   context.subscriptions.push(createMigration);
 
-  context.subscriptions.push(createLaravelFile);
+  context.subscriptions.push(createLaravelFileCommand);
 
   vscode.commands.executeCommand(
     "setContext",
