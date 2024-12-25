@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
+import resolveNamespace from "./Namespace";
 import NamespaceResolver from "./NamespaceResolver";
 import path = require("path");
 
@@ -94,9 +95,7 @@ export default class Creator {
         break;
     }
 
-    let namespaceResolver: NamespaceResolver = new NamespaceResolver();
-
-    let namespace = await namespaceResolver.resolve(folder.fsPath);
+    let namespace = await resolveNamespace(folder.fsPath);
 
     let filename = name + ".php";
 
@@ -143,7 +142,7 @@ export default class Creator {
 
     name = name.replace(/\.php+$/g, "");
 
-    let content = "<?php\n";
+    let content = "<?php\n\n";
 
     if (namespace !== "" && namespace !== undefined) {
       content += "namespace " + namespace + ";\n";

@@ -109,6 +109,11 @@
           "type": "boolean",
           "default": true,
           "description": "Show in the 'New Laravel file...' menu to create a migration"
+        },
+        "laravelFileCreator.composerFilePath": {
+          "type": "string",
+          "default": null,
+          "markdownDescription": "Set `composer.json` location path (relative to project root folder)"
         }
       }
     }
