@@ -152,7 +152,7 @@ export default class Creator {
 
     switch (type) {
       case LaravelFileTypes.SingleActionController:
-        content += `class ${name}Controller extends Controller\n`;
+        content += `class ${name}\n`;
         content += "{\n";
         content += "    public function __invoke()\n";
         content += "    {\n";
@@ -164,7 +164,7 @@ export default class Creator {
         content += "use Illuminate\\Foundation\\Http\\FormRequest;";
         content += "\n";
         content += "\n";
-        content += `class ${name}Request extends FormRequest\n`;
+        content += `class ${name} extends FormRequest\n`;
         content += "{\n";
         content += "    public function rules(): array\n";
         content += "    {\n";
