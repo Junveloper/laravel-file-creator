@@ -32,8 +32,6 @@ export default async function resolveNamespace(
   const { composerFolder, composerPath, composerFound } =
     findComposerFile(folder);
 
-  console.log(composerFolder, composerPath, composerFound);
-
   if (!composerFound || !composerFolder || !composerPath) {
     await vscode.window.showErrorMessage(
       "The composer.json file could not be found."
