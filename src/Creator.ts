@@ -83,9 +83,9 @@ export default class Creator {
 
     let filename = name + ".php";
 
-    let fullFilename = folder.fsPath + path.sep + filename;
+    let filePath = folder.fsPath + path.sep + filename;
 
-    this.writeFile(type, name, fullFilename, namespace);
+    this.writeFile(type, name, filePath, namespace);
   }
 
   private writeFile(

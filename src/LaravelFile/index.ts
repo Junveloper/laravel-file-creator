@@ -1,7 +1,9 @@
+import path from "path";
 import * as vscode from "vscode";
 import { LaravelFileTypes } from "../Creator";
-import { extractClassName, sanitizeFileName } from "../File";
+import { createFile, extractClassName, sanitizeFileName } from "../File";
 import resolveNamespace from "../Namespace";
+import generateLaravelFile from "./contentGenerate";
 import { inputBoxMapping } from "./inputBoxMapping";
 
 async function createLaravelFile(type: LaravelFileTypes, folder: vscode.Uri) {
@@ -16,6 +18,11 @@ async function createLaravelFile(type: LaravelFileTypes, folder: vscode.Uri) {
   const className = extractClassName(baseName);
   const namespace = await resolveNamespace(folder.fsPath);
   const fileName = convertBasenameForType(type, baseName);
+  const filePath = folder.fsPath + path.sep + fileName;
+
+  const content = generateLaravelFile(type, className, namespace);
+
+  createFile(filePath, content);
 }
 
 async function getLaravelFileName(
