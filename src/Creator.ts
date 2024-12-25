@@ -37,21 +37,7 @@ export default class Creator {
   readonly msgFileExists = "File already exists!";
   readonly msgMustOpenFile = "You must open a file to generate code";
 
-  public async createFile(type: LaravelFileTypes, folder?: vscode.Uri) {
-    if (!folder) {
-      let askedFolder = await vscode.window.showOpenDialog({
-        canSelectFiles: false,
-        canSelectFolders: true,
-        canSelectMany: false,
-      });
-
-      if (!askedFolder || !askedFolder[0]) {
-        return;
-      }
-
-      folder = askedFolder[0];
-    }
-
+  public async createFile(type: LaravelFileTypes, folder: vscode.Uri) {
     let name = await vscode.window.showInputBox(inputBoxMapping[type]);
 
     if (!name) {

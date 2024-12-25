@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import Creator, { LaravelFileTypes } from "./Creator";
+import promptFolderSelection from "./Workspace";
 
 export function activate(context: vscode.ExtensionContext) {
   const creator = new Creator();
@@ -7,20 +8,12 @@ export function activate(context: vscode.ExtensionContext) {
   const createLaravelFile = vscode.commands.registerCommand(
     "laravelFileCreator.createLaravelFile",
     async (folder?: vscode.Uri) => {
-      let targetFolder = folder;
+      if (!folder) {
+        folder = await promptFolderSelection();
 
-      if (!targetFolder) {
-        const selectedFolder = await vscode.window.showOpenDialog({
-          canSelectFiles: false,
-          canSelectFolders: true,
-          canSelectMany: false,
-        });
-
-        if (!selectedFolder || !selectedFolder[0]) {
+        if (!folder) {
           return;
         }
-
-        targetFolder = selectedFolder[0];
       }
 
       const fileType = await vscode.window.showQuickPick(
@@ -40,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      creator.createFile(fileType.value, targetFolder);
+      creator.createFile(fileType.value, folder);
     }
   );
 
