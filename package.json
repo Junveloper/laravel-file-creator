@@ -42,7 +42,7 @@
       {
         "command": "laravelFileCreator.createLaravelFile",
         "category": "Laravel File Creator",
-        "title": "Create Laravel File"
+        "title": "Create Other Laravel Files..."
       }
     ],
     "submenus": [
