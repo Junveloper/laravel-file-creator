@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import Creator, { LaravelFileTypes } from "./Creator";
-import promptFolderSelection from "./Workspace";
+import { promptFolderSelection } from "./Workspace";
 
 export function activate(context: vscode.ExtensionContext) {
   const creator = new Creator();

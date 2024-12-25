@@ -88,37 +88,14 @@ export default class Creator {
     this.writeFile(type, name, fullFilename, namespace);
   }
 
-  public async generateCode(type: LaravelFileTypes) {
-    const currentFile = vscode.window.activeTextEditor?.document.fileName;
-
-    if (!currentFile) {
-      vscode.window.showErrorMessage(this.msgMustOpenFile);
-      return;
-    }
-
-    let namespace = await resolveNamespace(path.dirname(currentFile));
-
-    if (namespace === undefined) {
-      return;
-    }
-
-    this.writeFile(
-      type,
-      path.basename(currentFile),
-      currentFile,
-      namespace,
-      true
-    );
-  }
-
   private writeFile(
     type: LaravelFileTypes,
     name: string,
-    filename: string,
+    filePath: string,
     namespace: string | undefined,
     overwrite: boolean = false
   ): void {
-    if (fs.existsSync(filename) && !overwrite) {
+    if (fs.existsSync(filePath) && !overwrite) {
       vscode.window.showErrorMessage(this.msgFileExists);
       return;
     }
@@ -180,10 +157,10 @@ export default class Creator {
         content += "};\n";
     }
 
-    fs.writeFileSync(filename, content);
+    fs.writeFileSync(filePath, content);
 
     vscode.workspace
-      .openTextDocument(vscode.Uri.file(filename))
+      .openTextDocument(vscode.Uri.file(filePath))
       .then((file) => {
         vscode.window.showTextDocument(file);
       });

@@ -1,8 +1,6 @@
 import * as vscode from "vscode";
 
-export default async function promptFolderSelection(): Promise<
-  vscode.Uri | undefined
-> {
+async function promptFolderSelection(): Promise<vscode.Uri | undefined> {
   const selection = await vscode.window.showOpenDialog({
     canSelectFiles: false,
     canSelectFolders: true,
@@ -15,3 +13,10 @@ export default async function promptFolderSelection(): Promise<
 
   return selection[0];
 }
+
+async function openTextDocument(uri: vscode.Uri) {
+  const document = await vscode.workspace.openTextDocument(uri);
+  await vscode.window.showTextDocument(document);
+}
+
+export { openTextDocument, promptFolderSelection };
