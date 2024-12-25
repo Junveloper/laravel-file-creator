@@ -36,6 +36,7 @@ export default async function resolveNamespace(
     await vscode.window.showErrorMessage(
       "The composer.json file could not be found."
     );
+
     return undefined;
   }
 
@@ -45,6 +46,7 @@ export default async function resolveNamespace(
     await vscode.window.showErrorMessage(
       "The composer.json file could not be read."
     );
+
     return undefined;
   }
 
@@ -73,6 +75,7 @@ export default async function resolveNamespace(
     await vscode.window.showErrorMessage(
       "The namespace could not be resolved."
     );
+
     return "";
   }
 
