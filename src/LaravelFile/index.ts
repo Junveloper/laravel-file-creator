@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import { createFile, extractClassName, sanitizeFileName } from "../File";
 import resolveNamespace from "../Namespace";
 import { openTextDocument } from "../Workspace";
-import generateLaravelFile from "./contentGenerate";
+import generateLaravelFile from "./contentGenerator";
 import { inputBoxMapping, LaravelFileTypes } from "./inputBoxMapping";
 
 export default async function createLaravelFile(
