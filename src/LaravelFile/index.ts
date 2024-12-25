@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 import { LaravelFileTypes } from "../Creator";
 import { createFile, extractClassName, sanitizeFileName } from "../File";
 import resolveNamespace from "../Namespace";
+import { openTextDocument } from "../Workspace";
 import generateLaravelFile from "./contentGenerate";
 import { inputBoxMapping } from "./inputBoxMapping";
 
@@ -23,6 +24,8 @@ async function createLaravelFile(type: LaravelFileTypes, folder: vscode.Uri) {
   const content = generateLaravelFile(type, className, namespace);
 
   createFile(filePath, content);
+
+  openTextDocument(vscode.Uri.file(filePath));
 }
 
 async function getLaravelFileName(
