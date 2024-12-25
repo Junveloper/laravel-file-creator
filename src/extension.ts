@@ -6,19 +6,21 @@ export function activate(context: vscode.ExtensionContext) {
 
   const createLaravelFile = vscode.commands.registerCommand(
     "laravelFileCreator.createLaravelFile",
-    async (folder) => {
-      if (!folder) {
-        folder = await vscode.window.showOpenDialog({
+    async (folder?: vscode.Uri) => {
+      let targetFolder = folder;
+
+      if (!targetFolder) {
+        const selectedFolder = await vscode.window.showOpenDialog({
           canSelectFiles: false,
           canSelectFolders: true,
           canSelectMany: false,
         });
 
-        if (!folder || !folder[0]) {
+        if (!selectedFolder || !selectedFolder[0]) {
           return;
         }
 
-        folder = folder[0];
+        targetFolder = selectedFolder[0];
       }
 
       const fileType = await vscode.window.showQuickPick(
@@ -38,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      creator.createFile(fileType.value, folder);
+      creator.createFile(fileType.value, targetFolder);
     }
   );
 
