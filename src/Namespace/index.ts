@@ -52,23 +52,24 @@ export default async function resolveNamespace(
 
   const psrEntries = collectPsrEntries(composer);
 
-  const pathMatches = psrEntries.flatMap((entry) => {
-    const pathNoLastSlash = removeLastPathSeparator(entry.path);
-    const pathWithSlash = ensurePathEndsWithSlash(entry.path);
+  const pathMatches = psrEntries
+    .map((entry): MatchedPath | null => {
+      const pathNoLastSlash = removeLastPathSeparator(entry.path);
 
-    const resolvedPath = path.resolve(composerFolder, pathNoLastSlash);
+      const resolvedPath = path.resolve(composerFolder, pathNoLastSlash);
 
-    if (folder.indexOf(resolvedPath) !== -1) {
-      return {
-        path: ensureEndsWithSystemSeparator(resolvedPath),
-        prefix: normalizeNamespace(entry.ns),
-        length: resolvedPath.length,
-        priority: entry.type === "psr-4" ? 1 : 0,
-      };
-    }
+      if (folder.indexOf(resolvedPath) !== -1) {
+        return {
+          path: ensureEndsWithSystemSeparator(resolvedPath),
+          prefix: normalizeNamespace(entry.ns),
+          length: resolvedPath.length,
+          priority: entry.type === "psr-4" ? 1 : 0,
+        };
+      }
 
-    return [];
-  });
+      return null;
+    })
+    .filter((entry) => entry !== null);
 
   if (pathMatches.length === 0) {
     await vscode.window.showErrorMessage(

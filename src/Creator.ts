@@ -1,7 +1,6 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
 import resolveNamespace from "./Namespace";
-import NamespaceResolver from "./NamespaceResolver";
 import path = require("path");
 
 export enum LaravelFileTypes {
@@ -72,7 +71,6 @@ export default class Creator {
         .replace(/[-T]/g, "_")
         .replace(/:/g, "")
         .slice(0, -5);
-
       name = `${dateString}_${name}`;
     } else {
       name = this.capitalize(name);
@@ -112,8 +110,7 @@ export default class Creator {
       return;
     }
 
-    let namespaceResolver: NamespaceResolver = new NamespaceResolver();
-    let namespace = await namespaceResolver.resolve(path.dirname(currentFile));
+    let namespace = await resolveNamespace(path.dirname(currentFile));
 
     if (namespace === undefined) {
       return;
