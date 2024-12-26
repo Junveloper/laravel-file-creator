@@ -38,7 +38,7 @@ type VSCodeContributes = {
 };
 
 function generatePackageJsonConfig() {
-  const packageJsonPath = resolve(__dirname, "../../package.json");
+  const packageJsonPath = resolve(__dirname, "../package.json");
   const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 
   const newContributes: VSCodeContributes = {

@@ -179,8 +179,8 @@
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
-    "compile:generatePackageJson": "tsc scripts/generatePackageJson.ts --outDir out/scripts",
-    "generatePackageJson": "node out/scripts/generatePackageJson.js",
+    "compile:generatePackageJson": "tsc scripts/generatePackageJson.ts ",
+    "generatePackageJson": "node scripts/generatePackageJson.js",
     "compile": "pnpm run compile:generatePackageJson && pnpm run generatePackageJson && tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
