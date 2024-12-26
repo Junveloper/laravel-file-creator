@@ -74,7 +74,7 @@ function generatePackageJsonConfig() {
 
   newContributes.menus["laravelFileCreator.menu"].push({
     command: "laravelFileCreator.createLaravelFile",
-    when: "explorerResourceIsFolder && phpCreateClass.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
     group: "2_laravelFileCreator@1",
   });
 

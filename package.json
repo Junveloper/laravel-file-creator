@@ -76,42 +76,42 @@
       "laravelFileCreator.menu": [
         {
           "command": "laravelFileCreator.createBladeFile",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateBladeFile",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateBladeFile",
           "group": "1_laravelFileCreator@1"
         },
         {
           "command": "laravelFileCreator.createBladeComponentClass",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateBladeComponentClass",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateBladeComponentClass",
           "group": "1_laravelFileCreator@2"
         },
         {
           "command": "laravelFileCreator.createConfig",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateConfig",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateConfig",
           "group": "1_laravelFileCreator@3"
         },
         {
           "command": "laravelFileCreator.createSingleActionController",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
           "group": "1_laravelFileCreator@4"
         },
         {
           "command": "laravelFileCreator.createFormRequest",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
           "group": "1_laravelFileCreator@5"
         },
         {
           "command": "laravelFileCreator.createModel",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
           "group": "1_laravelFileCreator@6"
         },
         {
           "command": "laravelFileCreator.createMigration",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
           "group": "1_laravelFileCreator@7"
         },
         {
           "command": "laravelFileCreator.createLaravelFile",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
           "group": "2_laravelFileCreator@1"
         }
       ]
