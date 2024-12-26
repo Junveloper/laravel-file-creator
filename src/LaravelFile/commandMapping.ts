@@ -27,6 +27,7 @@ export enum LaravelFileType {
   Exception = "Exception",
   FormRequest = "Form Request",
   Job = "Job",
+  JsonResource = "Json Resource",
   Model = "Model",
   Migration = "Migration",
 }
@@ -245,6 +246,27 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Job",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Job) + 1,
+    },
+  },
+  [LaravelFileType.JsonResource]: {
+    fileType: LaravelFileType.JsonResource,
+    quickPickLabel: "JSON Resource",
+    commandName: "laravelFileCreator.createJsonResource",
+    title: "New JSON Resource",
+    placeHolder: "JSON Resource Name",
+    prompt: "Name of JSON Resource",
+    contextTitle: "Create JSON Resource",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.JsonResource) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateJsonResource",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a JSON Resource",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.JsonResource) + 1,
     },
   },
   [LaravelFileType.Model]: {

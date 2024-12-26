@@ -21,6 +21,8 @@ export default function generateLaravelFile(
     [LaravelFileType.Exception]: () => exceptionCode(className, namespace),
     [LaravelFileType.FormRequest]: () => formRequestCode(className, namespace),
     [LaravelFileType.Job]: () => jobCode(className, namespace),
+    [LaravelFileType.JsonResource]: () =>
+      jsonResourceCode(className, namespace),
     [LaravelFileType.Model]: () => modelCode(className, namespace),
     [LaravelFileType.Migration]: () => migrationCode(),
   };
@@ -56,7 +58,7 @@ function configCode() {
   return `<?php
   
   return [
-    //
+    
   ]
   `;
 }
@@ -170,7 +172,7 @@ class ${className} extends FormRequest
     public function rules(): array
     {
         return [
-        //
+        
         ];
     }
 }`;
@@ -205,6 +207,28 @@ class ${className} implements ShouldQueue
     public function handle(): void
     {
         
+    }
+}`;
+}
+
+function jsonResourceCode(className: string, namespace?: string) {
+  if (!className.endsWith("Resource")) {
+    className += "Resource";
+  }
+
+  return `<?php
+  ${
+    namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+  }use Illuminate\\Http\\Request;
+use Illuminate\\Http\\Resources\\Json\\JsonResource;
+
+class ${className} extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+        
+        ];
     }
 }`;
 }
