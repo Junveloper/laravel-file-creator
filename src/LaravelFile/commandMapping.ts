@@ -20,12 +20,13 @@ export enum LaravelFileType {
   BladeFile = "Blade File",
   BladeComponentClass = "Blade Component Class",
   Config = "Config",
-  Command = "Command",
+  ConsoleCommand = "Console Command",
+  Controller = "Controller",
   Event = "Event",
   EventListener = "Event Listener",
   Exception = "Exception",
-  SingleActionController = "Single Action Controller",
   FormRequest = "Form Request",
+  Job = "Job",
   Model = "Model",
   Migration = "Migration",
 }
@@ -99,16 +100,16 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       order: getEnumIndex(LaravelFileType, LaravelFileType.Config) + 1,
     },
   },
-  [LaravelFileType.Command]: {
-    fileType: LaravelFileType.Command,
+  [LaravelFileType.ConsoleCommand]: {
+    fileType: LaravelFileType.ConsoleCommand,
     quickPickLabel: "Command",
     commandName: "laravelFileCreator.createCommand",
-    title: "New Command",
+    title: "New Console Command",
     placeHolder: "Command Name",
     prompt: "Name of Command",
-    contextTitle: "Create Command",
+    contextTitle: "Create Console Command",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Command) + 1
+      getEnumIndex(LaravelFileType, LaravelFileType.ConsoleCommand) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated",
     configuration: {
@@ -116,8 +117,29 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       type: "boolean",
       default: true,
       markdownDescription:
-        "Show in the 'New Laravel file...' menu to create a Command",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Command) + 1,
+        "Show in the 'New Laravel file...' menu to create a Console Command",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.ConsoleCommand) + 1,
+    },
+  },
+  [LaravelFileType.Controller]: {
+    fileType: LaravelFileType.Controller,
+    quickPickLabel: "Single Action Controller",
+    commandName: "laravelFileCreator.createSingleActionController",
+    title: "New Single Action Controller",
+    placeHolder: "Controller Name",
+    prompt: "Name of Single Action Controller",
+    contextTitle: "Create Single Action Controller",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Controller) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateSingleActionController",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a single action Controller",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Controller) + 1,
     },
   },
   [LaravelFileType.Event]: {
@@ -183,29 +205,6 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       order: getEnumIndex(LaravelFileType, LaravelFileType.Exception) + 1,
     },
   },
-  [LaravelFileType.SingleActionController]: {
-    fileType: LaravelFileType.SingleActionController,
-    quickPickLabel: "Single Action Controller",
-    commandName: "laravelFileCreator.createSingleActionController",
-    title: "New Single Action Controller",
-    placeHolder: "Controller Name",
-    prompt: "Name of Single Action Controller",
-    contextTitle: "Create Single Action Controller",
-    group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.SingleActionController) + 1
-    }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
-    configuration: {
-      key: "laravelFileCreator.showCreateSingleActionController",
-      type: "boolean",
-      default: true,
-      markdownDescription:
-        "Show in the 'New Laravel file...' menu to create a single action Controller",
-      order:
-        getEnumIndex(LaravelFileType, LaravelFileType.SingleActionController) +
-        1,
-    },
-  },
   [LaravelFileType.FormRequest]: {
     fileType: LaravelFileType.FormRequest,
     quickPickLabel: "Form Request",
@@ -225,6 +224,27 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Form Request",
       order: getEnumIndex(LaravelFileType, LaravelFileType.FormRequest) + 1,
+    },
+  },
+  [LaravelFileType.Job]: {
+    fileType: LaravelFileType.Job,
+    quickPickLabel: "Job",
+    commandName: "laravelFileCreator.createJob",
+    title: "New Job",
+    placeHolder: "Job Name",
+    prompt: "Name of Job",
+    contextTitle: "Create Job",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Job) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateJob",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Job",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Job) + 1,
     },
   },
   [LaravelFileType.Model]: {

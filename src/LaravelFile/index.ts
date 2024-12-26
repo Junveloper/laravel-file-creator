@@ -60,18 +60,20 @@ function convertBasenameToFileName(
     [LaravelFileType.BladeComponentClass]: (name) =>
       name.endsWith("Component") ? name : `${name}Component`,
     [LaravelFileType.Config]: (name) => name.toLowerCase(),
-    [LaravelFileType.Command]: (name) =>
+    [LaravelFileType.ConsoleCommand]: (name) =>
       name.endsWith("Command") ? name : `${name}Command`,
+    [LaravelFileType.Controller]: (name) =>
+      name.endsWith("Controller") ? name : `${name}Controller`,
     [LaravelFileType.Event]: (name) =>
       name.endsWith("Event") ? name : `${name}Event`,
     [LaravelFileType.EventListener]: (name) =>
       name.endsWith("Listener") ? name : `${name}Listener`,
     [LaravelFileType.Exception]: (name) =>
       name.endsWith("Exception") ? name : `${name}Exception`,
-    [LaravelFileType.SingleActionController]: (name) =>
-      name.endsWith("Controller") ? name : `${name}Controller`,
     [LaravelFileType.FormRequest]: (name) =>
       name.endsWith("Request") ? name : `${name}Request`,
+    [LaravelFileType.Job]: (name) =>
+      name.endsWith("Job") ? name : `${name}Job`,
     [LaravelFileType.Model]: (name) => name,
     [LaravelFileType.Migration]: (name) => `${dateString}_${name}`,
   };

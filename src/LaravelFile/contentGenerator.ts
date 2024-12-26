@@ -12,14 +12,15 @@ export default function generateLaravelFile(
     [LaravelFileType.BladeComponentClass]: () =>
       BladeComponentClassCode(className, namespace),
     [LaravelFileType.Config]: () => configCode(),
-    [LaravelFileType.Command]: () => commandCode(className, namespace),
+    [LaravelFileType.ConsoleCommand]: () =>
+      consoleCommandCode(className, namespace),
+    [LaravelFileType.Controller]: () => controllerCode(className, namespace),
     [LaravelFileType.Event]: () => eventCode(className, namespace),
     [LaravelFileType.EventListener]: () =>
       eventListenerCode(className, namespace),
     [LaravelFileType.Exception]: () => exceptionCode(className, namespace),
-    [LaravelFileType.SingleActionController]: () =>
-      singleActionControllerCode(className, namespace),
     [LaravelFileType.FormRequest]: () => formRequestCode(className, namespace),
+    [LaravelFileType.Job]: () => jobCode(className, namespace),
     [LaravelFileType.Model]: () => modelCode(className, namespace),
     [LaravelFileType.Migration]: () => migrationCode(),
   };
@@ -60,7 +61,7 @@ function configCode() {
   `;
 }
 
-function commandCode(className: string, namespace?: string) {
+function consoleCommandCode(className: string, namespace?: string) {
   if (!className.endsWith("Command")) {
     className += "Command";
   }
@@ -82,6 +83,21 @@ class ${className} extends Command
     public function handle(): void
     {
           
+    }
+}`;
+}
+
+function controllerCode(className: string, namespace?: string) {
+  if (!className.endsWith("Controller")) {
+    className += "Controller";
+  }
+
+  return `<?php
+${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}class ${className}
+{
+    public function __invoke()
+    {
+        
     }
 }`;
 }
@@ -138,20 +154,6 @@ class ${className} extends Exception
 }
 `;
 }
-function singleActionControllerCode(className: string, namespace?: string) {
-  if (!className.endsWith("Controller")) {
-    className += "Controller";
-  }
-
-  return `<?php
-${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}class ${className}
-{
-    public function __invoke()
-    {
-        
-    }
-}`;
-}
 
 function formRequestCode(className: string, namespace?: string) {
   if (!className.endsWith("Request")) {
@@ -170,6 +172,39 @@ class ${className} extends FormRequest
         return [
         //
         ];
+    }
+}`;
+}
+
+function jobCode(className: string, namespace?: string) {
+  if (!className.endsWith("Job")) {
+    className += "Job";
+  }
+
+  return `<?php
+  ${
+    namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+  }use Illuminate\\Bus\\Queueable;
+use Illuminate\\Contracts\\Queue\\ShouldQueue;
+use Illuminate\\Foundation\\Bus\\Dispatchable;
+use Illuminate\\Queue\\InteractsWithQueue;
+use Illuminate\\Queue\\SerializesModels;
+
+class ${className} implements ShouldQueue
+{
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
+
+    public function __construct()
+    {
+        
+    }
+
+    public function handle(): void
+    {
+        
     }
 }`;
 }
