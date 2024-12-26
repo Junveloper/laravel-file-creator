@@ -76,6 +76,8 @@ function convertBasenameToFileName(
       name.endsWith("Job") ? name : `${name}Job`,
     [LaravelFileType.JsonResource]: (name) =>
       name.endsWith("Resource") ? name : `${name}Resource`,
+    [LaravelFileType.JsonResourceCollection]: (name) =>
+      name.endsWith("Collection") ? name : `${name}Collection`,
     [LaravelFileType.Model]: (name) => name,
     [LaravelFileType.Migration]: (name) => `${dateString}_${name}`,
   };

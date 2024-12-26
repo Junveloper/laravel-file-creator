@@ -23,6 +23,8 @@ export default function generateLaravelFile(
     [LaravelFileType.Job]: () => jobCode(className, namespace),
     [LaravelFileType.JsonResource]: () =>
       jsonResourceCode(className, namespace),
+    [LaravelFileType.JsonResourceCollection]: () =>
+      jsonCollectionResourceCode(className, namespace),
     [LaravelFileType.Model]: () => modelCode(className, namespace),
     [LaravelFileType.Migration]: () => migrationCode(),
   };
@@ -224,6 +226,34 @@ use Illuminate\\Http\\Resources\\Json\\JsonResource;
 
 class ${className} extends JsonResource
 {
+    public function toArray(Request $request): array
+    {
+        return [
+        
+        ];
+    }
+}`;
+}
+
+function jsonCollectionResourceCode(className: string, namespace?: string) {
+  if (!className.endsWith("Collection")) {
+    className += "Collection";
+  }
+
+  return `<?php
+  ${
+    namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+  }use Illuminate\\Database\\Eloquent\\Collection;
+use Illuminate\\Http\\Request;
+use Illuminate\\Http\\Resources\\Json\\ResourceCollection;
+
+class ${className} extends ResourceCollection
+{
+    public function __construct(Collection $resource)
+    {
+        parent::__construct($resource);
+    }
+        
     public function toArray(Request $request): array
     {
         return [
