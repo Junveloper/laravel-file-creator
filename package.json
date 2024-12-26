@@ -181,7 +181,7 @@
     "vscode:prepublish": "pnpm run compile",
     "compile:commandMapping": "tsc src/LaravelFile/commandMapping.ts --outDir out/LaravelFile",
     "compile:generatePackageJson": "tsc scripts/generatePackageJson.ts --outDir scripts",
-    "generatePackageJson": "node scripts/generatePackageJson.js",
+    "generatePackageJson": "node scripts/scripts/generatePackageJson.js",
     "compile:src": "tsc -p ./",
     "compile": "pnpm run compile:commandMapping && pnpm run compile:generatePackageJson && pnpm run generatePackageJson && pnpm run compile:src",
     "watch": "tsc -watch -p ./",

@@ -3,4 +3,5 @@ dist
 node_modules
 .vscode-test/
 *.vsix
-scripts/generatePackageJson.js
+scripts/scripts/generatePackageJson.js
+scripts/src/LaravelFile/commandMapping.js

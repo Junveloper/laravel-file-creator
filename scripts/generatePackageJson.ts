@@ -1,9 +1,6 @@
 import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import {
-  commandsMapping,
-  type Command,
-} from "../out/LaravelFile/commandMapping";
+import { Command, commandsMapping } from "../src/LaravelFile/commandMapping";
 
 type ConfigurationProperty = {
   type: string;
@@ -41,7 +38,7 @@ type VSCodeContributes = {
 };
 
 function generatePackageJsonConfig() {
-  const packageJsonPath = resolve(__dirname, "../package.json");
+  const packageJsonPath = resolve(__dirname, "../../package.json");
   const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 
   const newContributes: VSCodeContributes = {
