@@ -35,12 +35,6 @@ The following files are supported:
 
 The namespace is auto-resolved through `composer.json` file.
 
-## Settings
-
-You can select which file will appear in the context menu.
-
-![Setting](https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/setting_screenshot.png)
-
 ### Creating Model
 
 ![CreateModel](https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/model-creation.gif)
@@ -52,3 +46,9 @@ You can select which file will appear in the context menu.
 ### Creating Resource Controller
 
 ![CreatingResourceController](https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/resource-controller.gif)
+
+## Settings
+
+You can select which file will appear in the context menu.
+
+![Setting](https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/setting_screenshot.png)
