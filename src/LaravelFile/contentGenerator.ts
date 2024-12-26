@@ -1,20 +1,48 @@
-import * as vscode from "vscode";
-import { LaravelFileTypes } from "./inputBoxMapping";
+import { workspace } from "vscode";
+import { toSnakeCase } from "../utils";
+import { LaravelFileType } from "./commandMapping";
 
 export default function generateLaravelFile(
-  type: LaravelFileTypes,
+  type: LaravelFileType,
   className: string,
   namespace?: string
 ) {
-  const generators: Record<LaravelFileTypes, () => string> = {
-    [LaravelFileTypes.Migration]: () => migrationCode(),
-    [LaravelFileTypes.SingleActionController]: () =>
+  const generators: Record<LaravelFileType, () => string> = {
+    [LaravelFileType.BladeFile]: () => bladeFileCode(),
+    [LaravelFileType.BladeComponentClass]: () =>
+      BladeComponentClassCode(className, namespace),
+    [LaravelFileType.SingleActionController]: () =>
       singleActionControllerCode(className, namespace),
-    [LaravelFileTypes.FormRequest]: () => formRequestCode(className, namespace),
-    [LaravelFileTypes.Model]: () => modelCode(className, namespace),
+    [LaravelFileType.FormRequest]: () => formRequestCode(className, namespace),
+    [LaravelFileType.Model]: () => modelCode(className, namespace),
+    [LaravelFileType.Migration]: () => migrationCode(),
   };
 
   return generators[type]();
+}
+
+function bladeFileCode() {
+  return `<div>
+  
+</div>`;
+}
+
+function BladeComponentClassCode(className: string, namespace?: string) {
+  const snakeCaseClassName = toSnakeCase(className);
+
+  return `<?php
+${
+  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+}use Illuminate\\Contracts\\View\\View;
+use Illuminate\\View\\Component;
+
+class ${className} extends Component
+{
+    public function render(): View
+    {
+        return view('components.${snakeCaseClassName}');
+    }
+}`;
 }
 
 function singleActionControllerCode(className: string, namespace?: string) {
@@ -23,10 +51,7 @@ function singleActionControllerCode(className: string, namespace?: string) {
   }
 
   return `<?php
-
-${namespace ? `namespace ${namespace};` : ""}
-
-class ${className}
+${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}class ${className}
 {
     public function __invoke()
     {
@@ -41,10 +66,9 @@ function formRequestCode(className: string, namespace?: string) {
   }
 
   return `<?php
-
-${namespace ? `namespace ${namespace};` : ""}
-
-use Illuminate\\Foundation\\Http\\FormRequest;
+${
+  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+}use Illuminate\\Foundation\\Http\\FormRequest;
 
 class ${className} extends FormRequest
 {
@@ -59,10 +83,9 @@ class ${className} extends FormRequest
 
 function modelCode(className: string, namespace?: string) {
   return `<?php
-
-${namespace ? `namespace ${namespace};` : ""}
-
-use Illuminate\\Database\\Eloquent\\Model;
+${
+  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+}use Illuminate\\Database\\Eloquent\\Model;
 
 class ${className} extends Model
 {
@@ -71,12 +94,11 @@ class ${className} extends Model
 }
 
 function migrationCode() {
-  const omitDownMethod = vscode.workspace
+  const omitDownMethod = workspace
     .getConfiguration("laravelFileCreator")
     .get("omitDownMethodInMigration");
 
-  if (omitDownMethod) {
-    return `<?php
+  return `<?php
 
 use Illuminate\\Database\\Migrations\\Migration;
 use Illuminate\\Database\\Schema\\Blueprint;
@@ -86,25 +108,10 @@ return new class extends Migration {
     public function up(): void
     {
         
+    }${
+      omitDownMethod
+        ? ""
+        : "\n\n    public function down(): void\n    {\n        \n    }"
     }
 };`;
-  } else {
-    return `<?php
-
-use Illuminate\\Database\\Migrations\\Migration;
-use Illuminate\\Database\\Schema\\Blueprint;
-use Illuminate\\Support\\Facades\\Schema;
-
-return new class extends Migration {
-    public function up(): void
-    {
-        
-    }
-
-    public function down(): void
-    {
-        
-    }
-};`;
-  }
 }

@@ -1,6 +1,6 @@
 import { existsSync, statSync } from "fs";
-import * as path from "path";
-import * as vscode from "vscode";
+import { dirname, join, parse, resolve, sep } from "path";
+import { Uri, window, workspace } from "vscode";
 
 type ComposerOutcome = {
   composerFolder?: string;
@@ -33,9 +33,7 @@ export default async function resolveNamespace(
     findComposerFile(folder);
 
   if (!composerFound || !composerFolder || !composerPath) {
-    await vscode.window.showErrorMessage(
-      "The composer.json file could not be found."
-    );
+    window.showErrorMessage("The composer.json file could not be found.");
 
     return undefined;
   }
@@ -43,9 +41,7 @@ export default async function resolveNamespace(
   const composer = await getComposerContent(composerPath);
 
   if (!composer) {
-    await vscode.window.showErrorMessage(
-      "The composer.json file could not be read."
-    );
+    window.showErrorMessage("The composer.json file could not be read.");
 
     return undefined;
   }
@@ -56,7 +52,7 @@ export default async function resolveNamespace(
     .map((entry): MatchedPath | null => {
       const pathNoLastSlash = removeLastPathSeparator(entry.path);
 
-      const resolvedPath = path.resolve(composerFolder, pathNoLastSlash);
+      const resolvedPath = resolve(composerFolder, pathNoLastSlash);
 
       if (folder.indexOf(resolvedPath) !== -1) {
         return {
@@ -72,11 +68,9 @@ export default async function resolveNamespace(
     .filter((entry) => entry !== null);
 
   if (pathMatches.length === 0) {
-    await vscode.window.showErrorMessage(
-      "The namespace could not be resolved."
-    );
+    window.showErrorMessage("The namespace could not be resolved.");
 
-    return "";
+    return undefined;
   }
 
   const finalFolder = ensureEndsWithSystemSeparator(folder);
@@ -89,9 +83,7 @@ export default async function resolveNamespace(
 }
 
 function findComposerFile(folder: string): ComposerOutcome {
-  const workspaceFolder = vscode.workspace.getWorkspaceFolder(
-    vscode.Uri.file(folder)
-  );
+  const workspaceFolder = workspace.getWorkspaceFolder(Uri.file(folder));
 
   if (!workspaceFolder) {
     return {
@@ -101,7 +93,7 @@ function findComposerFile(folder: string): ComposerOutcome {
 
   const workspaceFolderPath = workspaceFolder.uri.fsPath;
 
-  const composerFilePath = vscode.workspace
+  const composerFilePath = workspace
     .getConfiguration("laravelFileCreator")
     .get("composerFilePath");
 
@@ -109,11 +101,11 @@ function findComposerFile(folder: string): ComposerOutcome {
     return parseComposerFilePath(composerFilePath, workspaceFolderPath);
   }
 
-  const segments = folder.split(path.sep);
+  const segments = folder.split(sep);
 
   while (segments.length) {
-    const composerFolder = segments.join(path.sep);
-    const composerPath = path.join(composerFolder, "composer.json");
+    const composerFolder = segments.join(sep);
+    const composerPath = join(composerFolder, "composer.json");
 
     try {
       statSync(composerPath);
@@ -138,18 +130,18 @@ function parseComposerFilePath(
   composerFilePath: string,
   workspaceFolder: string
 ): ComposerOutcome {
-  const folder = path.join(workspaceFolder || "", composerFilePath);
-  const parsedPath = path.parse(folder);
+  const folder = join(workspaceFolder || "", composerFilePath);
+  const parsedPath = parse(folder);
 
   if (parsedPath.ext === ".json") {
     return {
-      composerFolder: ensureEndsWithSystemSeparator(path.dirname(folder)),
+      composerFolder: ensureEndsWithSystemSeparator(dirname(folder)),
       composerPath: folder,
       composerFound: true,
     };
   }
 
-  const filePath = path.join(folder, "composer.json");
+  const filePath = join(folder, "composer.json");
 
   if (!existsSync(filePath)) {
     return { composerFound: false };
@@ -163,8 +155,8 @@ function parseComposerFilePath(
 }
 
 function ensureEndsWithSystemSeparator(folder: string) {
-  if (!folder.endsWith(path.sep)) {
-    folder += path.sep;
+  if (!folder.endsWith(sep)) {
+    folder += sep;
   }
 
   return folder;
@@ -175,7 +167,7 @@ async function getComposerContent(
 ): Promise<ComposerJson | undefined> {
   try {
     let composerContent: string = (
-      await vscode.workspace.openTextDocument(composerFilePath)
+      await workspace.openTextDocument(composerFilePath)
     ).getText();
     return JSON.parse(composerContent);
   } catch (error) {

@@ -20,6 +20,16 @@
   "contributes": {
     "commands": [
       {
+        "command": "laravelFileCreator.createBladeFile",
+        "category": "Laravel File Creator",
+        "title": "Create Blade File"
+      },
+      {
+        "command": "laravelFileCreator.createBladeComponentClass",
+        "category": "Laravel File Creator",
+        "title": "Create Blade Component Class"
+      },
+      {
         "command": "laravelFileCreator.createSingleActionController",
         "category": "Laravel File Creator",
         "title": "Create Single Action Controller"

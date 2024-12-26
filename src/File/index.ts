@@ -1,13 +1,13 @@
-import * as fs from "fs";
-import * as vscode from "vscode";
+import { existsSync, writeFileSync } from "fs";
+import { window } from "vscode";
 
 function createFile(filePath: string, content: string) {
-  if (fs.existsSync(filePath)) {
-    vscode.window.showErrorMessage("The file already exists.");
+  if (existsSync(filePath)) {
+    window.showErrorMessage("The file already exists.");
     return;
   }
 
-  fs.writeFileSync(filePath, content);
+  writeFileSync(filePath, content);
 }
 
 function removeSpaces(name: string) {
