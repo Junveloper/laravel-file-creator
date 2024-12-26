@@ -123,7 +123,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateCommand",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Console Command",
       order: getEnumIndex(LaravelFileType, LaravelFileType.ConsoleCommand) + 1,
