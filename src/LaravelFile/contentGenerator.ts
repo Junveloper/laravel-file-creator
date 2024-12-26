@@ -16,6 +16,7 @@ export default function generateLaravelFile(
     [LaravelFileType.Event]: () => eventCode(className, namespace),
     [LaravelFileType.EventListener]: () =>
       eventListenerCode(className, namespace),
+    [LaravelFileType.Exception]: () => exceptionCode(className, namespace),
     [LaravelFileType.SingleActionController]: () =>
       singleActionControllerCode(className, namespace),
     [LaravelFileType.FormRequest]: () => formRequestCode(className, namespace),
@@ -124,6 +125,19 @@ function eventListenerCode(className: string, namespace?: string) {
 `;
 }
 
+function exceptionCode(className: string, namespace?: string) {
+  if (!className.endsWith("Exception")) {
+    className += "Exception";
+  }
+
+  return `<?php
+  ${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}use Exception;
+
+class ${className} extends Exception
+{
+}
+`;
+}
 function singleActionControllerCode(className: string, namespace?: string) {
   if (!className.endsWith("Controller")) {
     className += "Controller";

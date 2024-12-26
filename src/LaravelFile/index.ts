@@ -66,6 +66,8 @@ function convertBasenameToFileName(
       name.endsWith("Event") ? name : `${name}Event`,
     [LaravelFileType.EventListener]: (name) =>
       name.endsWith("Listener") ? name : `${name}Listener`,
+    [LaravelFileType.Exception]: (name) =>
+      name.endsWith("Exception") ? name : `${name}Exception`,
     [LaravelFileType.SingleActionController]: (name) =>
       name.endsWith("Controller") ? name : `${name}Controller`,
     [LaravelFileType.FormRequest]: (name) =>

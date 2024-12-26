@@ -23,6 +23,7 @@ export enum LaravelFileType {
   Command = "Command",
   Event = "Event",
   EventListener = "Event Listener",
+  Exception = "Exception",
   SingleActionController = "Single Action Controller",
   FormRequest = "Form Request",
   Model = "Model",
@@ -159,6 +160,27 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create an Event Listener",
       order: getEnumIndex(LaravelFileType, LaravelFileType.EventListener) + 1,
+    },
+  },
+  [LaravelFileType.Exception]: {
+    fileType: LaravelFileType.Exception,
+    quickPickLabel: "Exception",
+    commandName: "laravelFileCreator.createException",
+    title: "New Exception",
+    placeHolder: "Exception Name",
+    prompt: "Name of Exception",
+    contextTitle: "Create Exception",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Exception) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateException",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create an Exception",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Exception) + 1,
     },
   },
   [LaravelFileType.SingleActionController]: {
