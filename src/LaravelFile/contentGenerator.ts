@@ -11,6 +11,7 @@ export default function generateLaravelFile(
     [LaravelFileType.BladeFile]: () => bladeFileCode(),
     [LaravelFileType.BladeComponentClass]: () =>
       BladeComponentClassCode(className, namespace),
+    [LaravelFileType.Config]: () => configCode(),
     [LaravelFileType.SingleActionController]: () =>
       singleActionControllerCode(className, namespace),
     [LaravelFileType.FormRequest]: () => formRequestCode(className, namespace),
@@ -43,6 +44,15 @@ class ${className} extends Component
         return view('components.${snakeCaseClassName}');
     }
 }`;
+}
+
+function configCode() {
+  return `<?php
+  
+  return [
+    //
+  ]
+  `;
 }
 
 function singleActionControllerCode(className: string, namespace?: string) {

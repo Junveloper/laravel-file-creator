@@ -59,6 +59,7 @@ function convertBasenameForType(
     [LaravelFileType.BladeFile]: (name) => `${name}.blade`,
     [LaravelFileType.BladeComponentClass]: (name) =>
       name.endsWith("Component") ? name : `${name}Component`,
+    [LaravelFileType.Config]: (name) => name.toLowerCase(),
     [LaravelFileType.SingleActionController]: (name) =>
       name.endsWith("Controller") ? name : `${name}Controller`,
     [LaravelFileType.FormRequest]: (name) =>

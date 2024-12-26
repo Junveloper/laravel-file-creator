@@ -87,27 +87,27 @@
         {
           "command": "laravelFileCreator.createConfig",
           "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateConfig",
-          "group": "1_laravelFileCreator@7"
+          "group": "1_laravelFileCreator@3"
         },
         {
           "command": "laravelFileCreator.createSingleActionController",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "1_laravelFileCreator@3"
+          "group": "1_laravelFileCreator@4"
         },
         {
           "command": "laravelFileCreator.createFormRequest",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "1_laravelFileCreator@4"
+          "group": "1_laravelFileCreator@5"
         },
         {
           "command": "laravelFileCreator.createModel",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "1_laravelFileCreator@5"
+          "group": "1_laravelFileCreator@6"
         },
         {
           "command": "laravelFileCreator.createMigration",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "1_laravelFileCreator@6"
+          "group": "1_laravelFileCreator@7"
         },
         {
           "command": "laravelFileCreator.createLaravelFile",
@@ -134,7 +134,7 @@
         },
         "laravelFileCreator.showCreateConfig": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Config file",
           "order": 3
         },

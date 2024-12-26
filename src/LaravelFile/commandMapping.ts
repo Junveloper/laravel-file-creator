@@ -39,7 +39,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     placeHolder: "Blade File Name",
     prompt: "Name of Blade File (exclude .blade.php)",
     contextTitle: "Create Blade File",
-    group: "1_laravelFileCreator@1",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.BladeFile) + 1
+    }`,
     when: "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateBladeFile",
     configuration: {
       key: "laravelFileCreator.showCreateBladeFile",
@@ -58,7 +60,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     placeHolder: "Component Class Name",
     prompt: "Name of Blade Component Class",
     contextTitle: "Create Blade Component Class",
-    group: "1_laravelFileCreator@2",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.BladeComponentClass) + 1
+    }`,
     when: "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateBladeComponentClass",
     configuration: {
       key: "laravelFileCreator.showCreateBladeComponentClass",
@@ -72,18 +76,20 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
   },
   [LaravelFileType.Config]: {
     fileType: LaravelFileType.Config,
-    quickPickLabel: "Config",
+    quickPickLabel: "Config File",
     commandName: "laravelFileCreator.createConfig",
     title: "New Config",
     placeHolder: "Config Name",
     prompt: "Name of Config",
     contextTitle: "Create Config File",
-    group: "1_laravelFileCreator@7",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Config) + 1
+    }`,
     when: "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateConfig",
     configuration: {
       key: "laravelFileCreator.showCreateConfig",
       type: "boolean",
-      default: false,
+      default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Config file",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Config) + 1,
@@ -97,7 +103,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     placeHolder: "Controller Name",
     prompt: "Name of Single Action Controller",
     contextTitle: "Create Single Action Controller",
-    group: "1_laravelFileCreator@3",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.SingleActionController) + 1
+    }`,
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
       key: "laravelFileCreator.showCreateSingleActionController",
@@ -118,7 +126,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     placeHolder: "Form Request Name",
     prompt: "Name of Form Request",
     contextTitle: "Create Form Request",
-    group: "1_laravelFileCreator@4",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.FormRequest) + 1
+    }`,
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
       key: "laravelFileCreator.showCreateFormRequest",
@@ -137,7 +147,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     placeHolder: "Model Name",
     prompt: "Name of Model",
     contextTitle: "Create Model",
-    group: "1_laravelFileCreator@5",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Model) + 1
+    }`,
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
       key: "laravelFileCreator.showCreateModel",
@@ -156,7 +168,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     placeHolder: "Migration Name",
     prompt: "Name of Migration (use snake case)",
     contextTitle: "Create Migration",
-    group: "1_laravelFileCreator@6",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Migration) + 1
+    }`,
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
       key: "laravelFileCreator.showCreateMigration",
