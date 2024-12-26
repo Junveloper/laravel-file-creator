@@ -93,27 +93,38 @@
         "laravelFileCreator.showCreateSingleActionController": {
           "type": "boolean",
           "default": true,
-          "description": "Show in the 'New Laravel file...' menu to create a single action controller"
+          "description": "Show in the 'New Laravel file...' menu to create a single action controller",
+          "order": 1
         },
         "laravelFileCreator.showCreateFormRequest": {
           "type": "boolean",
           "default": true,
-          "description": "Show in the 'New Laravel file...' menu to create a form request"
+          "description": "Show in the 'New Laravel file...' menu to create a form request",
+          "order": 2
         },
         "laravelFileCreator.showCreateModel": {
           "type": "boolean",
           "default": true,
-          "description": "Show in the 'New Laravel file...' menu to create a model"
+          "description": "Show in the 'New Laravel file...' menu to create a model",
+          "order": 3
         },
         "laravelFileCreator.showCreateMigration": {
           "type": "boolean",
           "default": true,
-          "description": "Show in the 'New Laravel file...' menu to create a migration"
+          "description": "Show in the 'New Laravel file...' menu to create a migration",
+          "order": 4
+        },
+        "laravelFileCreator.omitDownMethodInMigration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Omit the `down` method in the migration file",
+          "order": 5
         },
         "laravelFileCreator.composerFilePath": {
           "type": "string",
           "default": null,
-          "markdownDescription": "Set `composer.json` location path (relative to project root folder)"
+          "markdownDescription": "Set `composer.json` location path (relative to project root folder)",
+          "order": 6
         }
       }
     }

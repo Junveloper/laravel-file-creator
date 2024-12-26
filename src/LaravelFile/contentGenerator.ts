@@ -1,3 +1,4 @@
+import * as vscode from "vscode";
 import { LaravelFileTypes } from "./inputBoxMapping";
 
 export default function generateLaravelFile(
@@ -70,7 +71,12 @@ class ${className} extends Model
 }
 
 function migrationCode() {
-  return `<?php
+  const omitDownMethod = vscode.workspace
+    .getConfiguration("laravelFileCreator")
+    .get("omitDownMethodInMigration");
+
+  if (omitDownMethod) {
+    return `<?php
 
 use Illuminate\\Database\\Migrations\\Migration;
 use Illuminate\\Database\\Schema\\Blueprint;
@@ -79,9 +85,26 @@ use Illuminate\\Support\\Facades\\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('', function (Blueprint $table) {
-
-        });
+        
     }
 };`;
+  } else {
+    return `<?php
+
+use Illuminate\\Database\\Migrations\\Migration;
+use Illuminate\\Database\\Schema\\Blueprint;
+use Illuminate\\Support\\Facades\\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        
+    }
+
+    public function down(): void
+    {
+        
+    }
+};`;
+  }
 }
