@@ -30,6 +30,7 @@ export default function generateLaravelFile(
     [LaravelFileType.Mailable]: () => mailableCode(className, namespace),
     [LaravelFileType.Notification]: () =>
       notificationCode(className, namespace),
+    [LaravelFileType.PestTest]: () => pestCode(),
     [LaravelFileType.Policy]: () => policyCode(className, namespace),
     [LaravelFileType.ResourceController]: () =>
       resourceControllerCode(className, namespace),
@@ -347,12 +348,12 @@ class ${className} extends Notification implements ShouldQueue
     {
     }
 
-    public function via($notifiable): array
+    public function via(object $notifiable): array
     {
         return ['mail'];
     }
 
-    public function toMail($notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
             ->line('The introduction to the notification.')
@@ -360,11 +361,19 @@ class ${className} extends Notification implements ShouldQueue
             ->line('Thank you for using our application!');
     }
 
-    public function toArray($notifiable): array
+    public function toArray(object $notifiable): array
     {
         return [];
     }
 }`;
+}
+
+function pestCode() {
+  return `<?php
+
+it('', function () {
+});
+  `;
 }
 
 function policyCode(className: string, namespace?: string) {

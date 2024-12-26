@@ -84,6 +84,8 @@ function convertBasenameToFileName(
     [LaravelFileType.Migration]: (name) => `${dateString}_${name}`,
     [LaravelFileType.Notification]: (name) =>
       name.endsWith("Notification") ? name : `${name}Notification`,
+    [LaravelFileType.PestTest]: (name) =>
+      name.endsWith("Test") ? name : `${name}Test`,
     [LaravelFileType.Policy]: (name) =>
       name.endsWith("Policy") ? name : `${name}Policy`,
     [LaravelFileType.ResourceController]: (name) =>

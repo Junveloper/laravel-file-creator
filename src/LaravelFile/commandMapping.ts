@@ -33,6 +33,7 @@ export enum LaravelFileType {
   Migration = "Migration",
   Model = "Model",
   Notification = "Notification",
+  PestTest = "Pest Test",
   Policy = "Policy",
   ResourceController = "Resource Controller",
   Rule = "Rule",
@@ -380,6 +381,27 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Notification",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Notification) + 1,
+    },
+  },
+  [LaravelFileType.PestTest]: {
+    fileType: LaravelFileType.PestTest,
+    quickPickLabel: "Pest Test",
+    commandName: "laravelFileCreator.createPestTest",
+    title: "New Pest Test",
+    placeHolder: "Pest Test Name",
+    prompt: "Name of Pest Test",
+    contextTitle: "Create Pest Test",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.PestTest) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreatePestTest",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Pest Test",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.PestTest) + 1,
     },
   },
   [LaravelFileType.Policy]: {
