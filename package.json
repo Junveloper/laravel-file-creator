@@ -70,24 +70,34 @@
       ],
       "laravelFileCreator.menu": [
         {
+          "command": "laravelFileCreator.createBladeFile",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateBladeFile",
+          "group": "1_laravelFileCreator@1"
+        },
+        {
+          "command": "laravelFileCreator.createBladeComponentClass",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateBladeComponentClass",
+          "group": "1_laravelFileCreator@2"
+        },
+        {
           "command": "laravelFileCreator.createSingleActionController",
           "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateSingleActionController",
-          "group": "1_laravelFileCreator@1"
+          "group": "1_laravelFileCreator@3"
         },
         {
           "command": "laravelFileCreator.createFormRequest",
           "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateFormRequest",
-          "group": "1_laravelFileCreator@2"
+          "group": "1_laravelFileCreator@4"
         },
         {
           "command": "laravelFileCreator.createModel",
           "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateModel",
-          "group": "1_laravelFileCreator@3"
+          "group": "1_laravelFileCreator@5"
         },
         {
           "command": "laravelFileCreator.createMigration",
           "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateMigration",
-          "group": "1_laravelFileCreator@4"
+          "group": "1_laravelFileCreator@6"
         },
         {
           "command": "laravelFileCreator.createLaravelFile",
@@ -100,48 +110,62 @@
       "type": "object",
       "title": "Laravel File Creator",
       "properties": {
+        "laravelFileCreator.showCreateBladeFile": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a blade file",
+          "order": 1
+        },
+        "laravelFileCreator.showCreateBladeComponentClass": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a blade component class",
+          "order": 2
+        },
         "laravelFileCreator.showCreateSingleActionController": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a single action controller",
-          "order": 1
+          "order": 3
         },
         "laravelFileCreator.showCreateFormRequest": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a form request",
-          "order": 2
+          "order": 4
         },
         "laravelFileCreator.showCreateModel": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a model",
-          "order": 3
+          "order": 5
         },
         "laravelFileCreator.showCreateMigration": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a migration",
-          "order": 4
+          "order": 6
         },
         "laravelFileCreator.omitDownMethodInMigration": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Omit the `down` method in the migration file",
-          "order": 5
+          "order": 7
         },
         "laravelFileCreator.composerFilePath": {
           "type": "string",
           "default": null,
           "markdownDescription": "Set `composer.json` location path (relative to project root folder)",
-          "order": 6
+          "order": 8
         }
       }
     }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
-    "compile": "tsc -p ./",
+    "compile:generatePackageJson": "tsc scripts/generatePackageJson.ts --outDir out/scripts",
+    "generatePackageJson": "node out/scripts/generatePackageJson.js",
+    "compile": "pnpm run compile:generatePackageJson && pnpm run generatePackageJson && tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src",
