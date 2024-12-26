@@ -4,7 +4,7 @@
 
 # Create Laravel File easily for Visual Studio Code
 
-A Visual Studio Code extension for creating various Laravel files from context menu in file explorer or in opened file.
+A Visual Studio Code [extension](https://marketplace.visualstudio.com/items?itemName=Junveloper.vscode-laravel-file-creator) for creating various Laravel files from context menu in file explorer or in opened file.
 
 This has been inspired from one of the features from a popular PHPStorm plugin, [Laravel Idea](https://laravel-idea.com/), and another VSCode Extension, [PHP Create Class](https://marketplace.visualstudio.com/items?itemName=jaguadoromero.vscode-php-create-class).
 
@@ -38,6 +38,8 @@ The namespace is auto-resolved through `composer.json` file.
 ## Settings
 
 You can select which file will appear in the context menu.
+
+![Setting](https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/setting_screenshot.png)
 
 ### Creating Model
 
