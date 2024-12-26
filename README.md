@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/logo.png" alt="Create PHP Class" />
+    <img src="https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/logo.png" alt="Create PHP Class" style="width: 300px; height:300px"/>
 </p>
 
 # Create Laravel File easily for Visual Studio Code
@@ -49,4 +49,4 @@ You can select which file will appear in the context menu.
 
 ### Creating Resource Controller
 
-![CreatingResourceController](https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/resource_controller.gif)
+![CreatingResourceController](https://raw.githubusercontent.com/Junveloper/laravel-file-creator/main/resource-controller.gif)
