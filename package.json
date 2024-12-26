@@ -3,10 +3,10 @@
   "displayName": "Laravel File Creator",
   "publisher": "junveloper",
   "description": "A Visual Studio Code Extension to create Laravel files from context menu in file explorer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "icon": "icon.png",
   "engines": {
-    "vscode": "^1.96.0"
+    "vscode": "^1.8.0"
   },
   "repository": {
     "type": "git",
