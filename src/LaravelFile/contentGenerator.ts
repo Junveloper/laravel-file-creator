@@ -13,6 +13,9 @@ export default function generateLaravelFile(
       BladeComponentClassCode(className, namespace),
     [LaravelFileType.Config]: () => configCode(),
     [LaravelFileType.Command]: () => commandCode(className, namespace),
+    [LaravelFileType.Event]: () => eventCode(className, namespace),
+    [LaravelFileType.EventListener]: () =>
+      eventListenerCode(className, namespace),
     [LaravelFileType.SingleActionController]: () =>
       singleActionControllerCode(className, namespace),
     [LaravelFileType.FormRequest]: () => formRequestCode(className, namespace),
@@ -80,6 +83,45 @@ class ${className} extends Command
           
     }
 }`;
+}
+
+function eventCode(className: string, namespace?: string) {
+  if (!className.endsWith("Event")) {
+    className += "Event";
+  }
+
+  return `<?php
+  ${
+    namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+  }use Illuminate\\Foundation\\Events\\Dispatchable;
+
+class ${className}
+{     
+    use Dispatchable;
+
+    public function __construct()
+    {   
+    }
+}`;
+}
+
+function eventListenerCode(className: string, namespace?: string) {
+  if (!className.endsWith("Listener")) {
+    className += "Listener";
+  }
+
+  return `<?php
+  ${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}class ${className}
+{
+  public function __construct()
+  {
+  }
+
+  public function handle($event): void
+  {
+  }
+}
+`;
 }
 
 function singleActionControllerCode(className: string, namespace?: string) {

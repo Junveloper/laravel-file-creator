@@ -21,6 +21,8 @@ export enum LaravelFileType {
   BladeComponentClass = "Blade Component Class",
   Config = "Config",
   Command = "Command",
+  Event = "Event",
+  EventListener = "Event Listener",
   SingleActionController = "Single Action Controller",
   FormRequest = "Form Request",
   Model = "Model",
@@ -115,6 +117,48 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Command",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Command) + 1,
+    },
+  },
+  [LaravelFileType.Event]: {
+    fileType: LaravelFileType.Event,
+    quickPickLabel: "Event",
+    commandName: "laravelFileCreator.createEvent",
+    title: "New Event",
+    placeHolder: "Event Name",
+    prompt: "Name of Event",
+    contextTitle: "Create Event",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Event) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateEvent",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create an Event",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Event) + 1,
+    },
+  },
+  [LaravelFileType.EventListener]: {
+    fileType: LaravelFileType.EventListener,
+    quickPickLabel: "Event Listener",
+    commandName: "laravelFileCreator.createEventListener",
+    title: "New Event Listener",
+    placeHolder: "Event Listener Name",
+    prompt: "Name of Event Listener",
+    contextTitle: "Create Event Listener",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.EventListener) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateEventListener",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create an Event Listener",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.EventListener) + 1,
     },
   },
   [LaravelFileType.SingleActionController]: {

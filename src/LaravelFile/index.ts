@@ -22,7 +22,7 @@ export default async function createLaravelFile(
 
   const namespace = await resolveNamespace(folder.fsPath);
 
-  const fileName = convertBasenameForType(type, baseName);
+  const fileName = convertBasenameToFileName(type, baseName);
   const filePath = folder.fsPath + path.sep + fileName;
 
   const content = generateLaravelFile(type, className, namespace);
@@ -44,7 +44,7 @@ async function getLaravelFileName(
   return name;
 }
 
-function convertBasenameForType(
+function convertBasenameToFileName(
   type: LaravelFileType,
   baseName: string
 ): string {
@@ -62,6 +62,10 @@ function convertBasenameForType(
     [LaravelFileType.Config]: (name) => name.toLowerCase(),
     [LaravelFileType.Command]: (name) =>
       name.endsWith("Command") ? name : `${name}Command`,
+    [LaravelFileType.Event]: (name) =>
+      name.endsWith("Event") ? name : `${name}Event`,
+    [LaravelFileType.EventListener]: (name) =>
+      name.endsWith("Listener") ? name : `${name}Listener`,
     [LaravelFileType.SingleActionController]: (name) =>
       name.endsWith("Controller") ? name : `${name}Controller`,
     [LaravelFileType.FormRequest]: (name) =>
