@@ -1,5 +1,5 @@
 import { workspace } from "vscode";
-import { toSnakeCase } from "../utils";
+import { camelCaseToSnakeCase, commandNameToSignature } from "../utils";
 import { LaravelFileType } from "./commandMapping";
 
 export default function generateLaravelFile(
@@ -12,6 +12,7 @@ export default function generateLaravelFile(
     [LaravelFileType.BladeComponentClass]: () =>
       BladeComponentClassCode(className, namespace),
     [LaravelFileType.Config]: () => configCode(),
+    [LaravelFileType.Command]: () => commandCode(className, namespace),
     [LaravelFileType.SingleActionController]: () =>
       singleActionControllerCode(className, namespace),
     [LaravelFileType.FormRequest]: () => formRequestCode(className, namespace),
@@ -29,7 +30,7 @@ function bladeFileCode() {
 }
 
 function BladeComponentClassCode(className: string, namespace?: string) {
-  const snakeCaseClassName = toSnakeCase(className);
+  const snakeCaseClassName = camelCaseToSnakeCase(className);
 
   return `<?php
 ${
@@ -53,6 +54,32 @@ function configCode() {
     //
   ]
   `;
+}
+
+function commandCode(className: string, namespace?: string) {
+  if (!className.endsWith("Command")) {
+    className += "Command";
+  }
+
+  const commandName = className.replace("Command", "");
+  const signature = commandNameToSignature(commandName);
+
+  return `<?php
+  ${
+    namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+  }use Illuminate\\Console\\Command;
+
+class ${className} extends Command
+{
+    protected $signature = '${signature}';
+
+    protected $description = 'Command description';
+      
+    public function handle(): void
+    {
+          
+    }
+}`;
 }
 
 function singleActionControllerCode(className: string, namespace?: string) {

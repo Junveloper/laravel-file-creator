@@ -20,6 +20,7 @@ export enum LaravelFileType {
   BladeFile = "Blade File",
   BladeComponentClass = "Blade Component Class",
   Config = "Config",
+  Command = "Command",
   SingleActionController = "Single Action Controller",
   FormRequest = "Form Request",
   Model = "Model",
@@ -93,6 +94,27 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Config file",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Config) + 1,
+    },
+  },
+  [LaravelFileType.Command]: {
+    fileType: LaravelFileType.Command,
+    quickPickLabel: "Command",
+    commandName: "laravelFileCreator.createCommand",
+    title: "New Command",
+    placeHolder: "Command Name",
+    prompt: "Name of Command",
+    contextTitle: "Create Command",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Command) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateCommand",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Command",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Command) + 1,
     },
   },
   [LaravelFileType.SingleActionController]: {

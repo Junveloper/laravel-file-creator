@@ -60,6 +60,8 @@ function convertBasenameForType(
     [LaravelFileType.BladeComponentClass]: (name) =>
       name.endsWith("Component") ? name : `${name}Component`,
     [LaravelFileType.Config]: (name) => name.toLowerCase(),
+    [LaravelFileType.Command]: (name) =>
+      name.endsWith("Command") ? name : `${name}Command`,
     [LaravelFileType.SingleActionController]: (name) =>
       name.endsWith("Controller") ? name : `${name}Controller`,
     [LaravelFileType.FormRequest]: (name) =>
