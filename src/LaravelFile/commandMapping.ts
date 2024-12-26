@@ -102,7 +102,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateConfig",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Config file",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Config) + 1,
@@ -165,7 +165,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateEvent",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create an Event",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Event) + 1,
@@ -186,7 +186,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateEventListener",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create an Event Listener",
       order: getEnumIndex(LaravelFileType, LaravelFileType.EventListener) + 1,
@@ -207,7 +207,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateException",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create an Exception",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Exception) + 1,
@@ -249,7 +249,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateJob",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Job",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Job) + 1,
@@ -291,7 +291,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateJsonResourceCollection",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a JSON Resource Collection",
       order:
@@ -356,7 +356,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateMailable",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Mailable",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Mailable) + 1,
@@ -377,7 +377,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateNotification",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Notification",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Notification) + 1,
@@ -419,7 +419,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreatePolicy",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Policy",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Policy) + 1,
@@ -440,7 +440,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateResourceController",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Resource Controller",
       order:
@@ -462,7 +462,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     configuration: {
       key: "laravelFileCreator.showCreateRule",
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Rule",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Rule) + 1,
