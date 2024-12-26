@@ -24,6 +24,10 @@ export enum LaravelFileType {
   Migration = "Migration",
 }
 
+function getEnumIndex(enumObj: object, value: string): number {
+  return Object.values(enumObj).indexOf(value);
+}
+
 export const commandsMapping: Record<LaravelFileType, Command> = {
   [LaravelFileType.BladeFile]: {
     fileType: LaravelFileType.BladeFile,
@@ -40,7 +44,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Blade file",
-      order: 1,
+      order: getEnumIndex(LaravelFileType, LaravelFileType.BladeFile) + 1,
     },
   },
   [LaravelFileType.BladeComponentClass]: {
@@ -58,7 +62,8 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Blade Component class",
-      order: 2,
+      order:
+        getEnumIndex(LaravelFileType, LaravelFileType.BladeComponentClass) + 1,
     },
   },
   [LaravelFileType.SingleActionController]: {
@@ -76,7 +81,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a single action Controller",
-      order: 3,
+      order:
+        getEnumIndex(LaravelFileType, LaravelFileType.SingleActionController) +
+        1,
     },
   },
   [LaravelFileType.FormRequest]: {
@@ -94,7 +101,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Form Request",
-      order: 4,
+      order: getEnumIndex(LaravelFileType, LaravelFileType.FormRequest) + 1,
     },
   },
   [LaravelFileType.Model]: {
@@ -112,7 +119,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Model",
-      order: 5,
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Model) + 1,
     },
   },
   [LaravelFileType.Migration]: {
@@ -130,7 +137,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Migration",
-      order: 6,
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Migration) + 1,
     },
   },
 };
