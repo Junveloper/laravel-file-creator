@@ -1,6 +1,6 @@
 import { InputBoxOptions } from "vscode";
 
-type Command = InputBoxOptions & {
+export type Command = InputBoxOptions & {
   fileType: LaravelFileType;
   quickPickLabel: string;
   commandName: string;

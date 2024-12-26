@@ -179,9 +179,11 @@
   },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
-    "compile:generatePackageJson": "tsc scripts/generatePackageJson.ts ",
+    "compile:commandMapping": "tsc src/LaravelFile/commandMapping.ts --outDir out/LaravelFile",
+    "compile:generatePackageJson": "tsc scripts/generatePackageJson.ts --outDir scripts",
     "generatePackageJson": "node scripts/generatePackageJson.js",
-    "compile": "pnpm run compile:generatePackageJson && pnpm run generatePackageJson && tsc -p ./",
+    "compile:src": "tsc -p ./",
+    "compile": "pnpm run compile:commandMapping && pnpm run compile:generatePackageJson && pnpm run generatePackageJson && pnpm run compile:src",
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src",

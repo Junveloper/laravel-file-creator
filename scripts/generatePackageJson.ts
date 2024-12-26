@@ -1,6 +1,9 @@
 import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
-import { commandsMapping } from "../src/LaravelFile/commandMapping";
+import {
+  commandsMapping,
+  type Command,
+} from "../out/LaravelFile/commandMapping";
 
 type ConfigurationProperty = {
   type: string;
@@ -42,7 +45,7 @@ function generatePackageJsonConfig() {
   const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 
   const newContributes: VSCodeContributes = {
-    commands: Object.values(commandsMapping).map((command) => ({
+    commands: Object.values(commandsMapping).map((command: Command) => ({
       command: command.commandName,
       category: "Laravel File Creator",
       title: command.contextTitle,
@@ -51,8 +54,8 @@ function generatePackageJsonConfig() {
     menus: {
       "explorer/context": packageJson.contributes.menus["explorer/context"],
       "laravelFileCreator.menu": Object.values(commandsMapping)
-        .filter((command) => command.configuration)
-        .map((command) => ({
+        .filter((command: Command) => command.configuration)
+        .map((command: Command) => ({
           command: command.commandName,
           when: command.when,
           group: command.group,
@@ -77,7 +80,7 @@ function generatePackageJsonConfig() {
     group: "2_laravelFileCreator@1",
   });
 
-  Object.values(commandsMapping).forEach((command) => {
+  Object.values(commandsMapping).forEach((command: Command) => {
     newContributes.configuration.properties[command.configuration.key] = {
       type: command.configuration.type,
       default: command.configuration.default,
