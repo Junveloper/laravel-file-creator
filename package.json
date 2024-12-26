@@ -30,6 +30,11 @@
         "title": "Create Blade Component Class"
       },
       {
+        "command": "laravelFileCreator.createConfig",
+        "category": "Laravel File Creator",
+        "title": "Create Config File"
+      },
+      {
         "command": "laravelFileCreator.createSingleActionController",
         "category": "Laravel File Creator",
         "title": "Create Single Action Controller"
@@ -80,29 +85,34 @@
           "group": "1_laravelFileCreator@2"
         },
         {
+          "command": "laravelFileCreator.createConfig",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateConfig",
+          "group": "1_laravelFileCreator@7"
+        },
+        {
           "command": "laravelFileCreator.createSingleActionController",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateSingleActionController",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated",
           "group": "1_laravelFileCreator@3"
         },
         {
           "command": "laravelFileCreator.createFormRequest",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateFormRequest",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated",
           "group": "1_laravelFileCreator@4"
         },
         {
           "command": "laravelFileCreator.createModel",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateModel",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated",
           "group": "1_laravelFileCreator@5"
         },
         {
           "command": "laravelFileCreator.createMigration",
-          "when": "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateMigration",
+          "when": "explorerResourceIsFolder && phpCreateClass.activated",
           "group": "1_laravelFileCreator@6"
         },
         {
           "command": "laravelFileCreator.createLaravelFile",
           "when": "explorerResourceIsFolder && phpCreateClass.activated",
-          "group": "2_laravelFileCreator@4"
+          "group": "2_laravelFileCreator@1"
         }
       ]
     },
@@ -122,29 +132,35 @@
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Blade Component class",
           "order": 2
         },
+        "laravelFileCreator.showCreateConfig": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a Config file",
+          "order": 3
+        },
         "laravelFileCreator.showCreateSingleActionController": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a single action Controller",
-          "order": 3
+          "order": 4
         },
         "laravelFileCreator.showCreateFormRequest": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Form Request",
-          "order": 4
+          "order": 5
         },
         "laravelFileCreator.showCreateModel": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Model",
-          "order": 5
+          "order": 6
         },
         "laravelFileCreator.showCreateMigration": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Migration",
-          "order": 6
+          "order": 7
         },
         "laravelFileCreator.omitDownMethodInMigration": {
           "type": "boolean",

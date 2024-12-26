@@ -55,12 +55,7 @@ function generatePackageJsonConfig() {
         .filter((command) => command.configuration)
         .map((command) => ({
           command: command.commandName,
-          when: `${
-            command.when
-          } && config.laravelFileCreator.showCreate${command.fileType.replace(
-            /\s+/g,
-            ""
-          )}`,
+          when: command.when,
           group: command.group,
         })),
     },
@@ -71,37 +66,27 @@ function generatePackageJsonConfig() {
     },
   };
 
-  // Add the "Create Other Laravel Files..." command
   newContributes.commands.push({
     command: "laravelFileCreator.createLaravelFile",
     category: "Laravel File Creator",
     title: "Create Other Laravel Files...",
   });
 
-  // Add the "Create Other Laravel Files..." menu item
   newContributes.menus["laravelFileCreator.menu"].push({
     command: "laravelFileCreator.createLaravelFile",
     when: "explorerResourceIsFolder && phpCreateClass.activated",
-    group: "2_laravelFileCreator@4",
+    group: "2_laravelFileCreator@1",
   });
 
-  // Generate configuration properties
-  Object.values(commandsMapping)
-    .filter((command) => command.configuration)
-    .forEach((command) => {
-      const configKey = `laravelFileCreator.showCreate${command.fileType.replace(
-        /\s+/g,
-        ""
-      )}`;
-      newContributes.configuration.properties[configKey] = {
-        type: command.configuration!.type,
-        default: command.configuration!.default,
-        markdownDescription: command.configuration!.markdownDescription,
-        order: command.configuration!.order,
-      };
-    });
+  Object.values(commandsMapping).forEach((command) => {
+    newContributes.configuration.properties[command.configuration.key] = {
+      type: command.configuration.type,
+      default: command.configuration.default,
+      markdownDescription: command.configuration.markdownDescription,
+      order: command.configuration.order,
+    };
+  });
 
-  // Add omitDownMethodInMigration configuration
   newContributes.configuration.properties[
     "laravelFileCreator.omitDownMethodInMigration"
   ] = {
@@ -111,7 +96,6 @@ function generatePackageJsonConfig() {
     order: 7,
   };
 
-  // Add composerFilePath configuration
   newContributes.configuration.properties[
     "laravelFileCreator.composerFilePath"
   ] = {
@@ -122,7 +106,6 @@ function generatePackageJsonConfig() {
     order: 8,
   };
 
-  // Replace the entire contributes section
   packageJson.contributes = newContributes;
 
   writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + "\n");

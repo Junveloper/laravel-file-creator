@@ -5,9 +5,10 @@ type Command = InputBoxOptions & {
   quickPickLabel: string;
   commandName: string;
   contextTitle: string;
-  when?: string;
+  when: string;
   group: string;
-  configuration?: {
+  configuration: {
+    key: string;
     type: string;
     default: boolean;
     markdownDescription: string;
@@ -18,6 +19,7 @@ type Command = InputBoxOptions & {
 export enum LaravelFileType {
   BladeFile = "Blade File",
   BladeComponentClass = "Blade Component Class",
+  Config = "Config",
   SingleActionController = "Single Action Controller",
   FormRequest = "Form Request",
   Model = "Model",
@@ -38,8 +40,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Blade File (exclude .blade.php)",
     contextTitle: "Create Blade File",
     group: "1_laravelFileCreator@1",
-    when: "explorerResourceIsFolder && phpCreateClass.activated",
+    when: "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateBladeFile",
     configuration: {
+      key: "laravelFileCreator.showCreateBladeFile",
       type: "boolean",
       default: false,
       markdownDescription:
@@ -56,14 +59,34 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Blade Component Class",
     contextTitle: "Create Blade Component Class",
     group: "1_laravelFileCreator@2",
-    when: "explorerResourceIsFolder && phpCreateClass.activated",
+    when: "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateBladeComponentClass",
     configuration: {
+      key: "laravelFileCreator.showCreateBladeComponentClass",
       type: "boolean",
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Blade Component class",
       order:
         getEnumIndex(LaravelFileType, LaravelFileType.BladeComponentClass) + 1,
+    },
+  },
+  [LaravelFileType.Config]: {
+    fileType: LaravelFileType.Config,
+    quickPickLabel: "Config",
+    commandName: "laravelFileCreator.createConfig",
+    title: "New Config",
+    placeHolder: "Config Name",
+    prompt: "Name of Config",
+    contextTitle: "Create Config File",
+    group: "1_laravelFileCreator@7",
+    when: "explorerResourceIsFolder && phpCreateClass.activated && config.laravelFileCreator.showCreateConfig",
+    configuration: {
+      key: "laravelFileCreator.showCreateConfig",
+      type: "boolean",
+      default: false,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Config file",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Config) + 1,
     },
   },
   [LaravelFileType.SingleActionController]: {
@@ -77,6 +100,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: "1_laravelFileCreator@3",
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
+      key: "laravelFileCreator.showCreateSingleActionController",
       type: "boolean",
       default: true,
       markdownDescription:
@@ -97,6 +121,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: "1_laravelFileCreator@4",
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
+      key: "laravelFileCreator.showCreateFormRequest",
       type: "boolean",
       default: true,
       markdownDescription:
@@ -115,6 +140,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: "1_laravelFileCreator@5",
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
+      key: "laravelFileCreator.showCreateModel",
       type: "boolean",
       default: true,
       markdownDescription:
@@ -133,6 +159,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: "1_laravelFileCreator@6",
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
+      key: "laravelFileCreator.showCreateMigration",
       type: "boolean",
       default: true,
       markdownDescription:
