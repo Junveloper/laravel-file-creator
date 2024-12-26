@@ -29,8 +29,13 @@ export enum LaravelFileType {
   Job = "Job",
   JsonResource = "JSON Resource",
   JsonResourceCollection = "JSON Resource Collection",
-  Model = "Model",
+  Mailable = "Mailable",
   Migration = "Migration",
+  Model = "Model",
+  Notification = "Notification",
+  Policy = "Policy",
+  ResourceController = "Resource Controller",
+  Rule = "Rule",
 }
 
 function getEnumIndex(enumObj: object, value: string): number {
@@ -333,6 +338,112 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Migration",
       order: getEnumIndex(LaravelFileType, LaravelFileType.Migration) + 1,
+    },
+  },
+  [LaravelFileType.Mailable]: {
+    fileType: LaravelFileType.Mailable,
+    quickPickLabel: "Mailable",
+    commandName: "laravelFileCreator.createMailable",
+    title: "New Mailable",
+    placeHolder: "Mailable Name",
+    prompt: "Name of Mailable",
+    contextTitle: "Create Mailable",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Mailable) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateMailable",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Mailable",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Mailable) + 1,
+    },
+  },
+  [LaravelFileType.Notification]: {
+    fileType: LaravelFileType.Notification,
+    quickPickLabel: "Notification",
+    commandName: "laravelFileCreator.createNotification",
+    title: "New Notification",
+    placeHolder: "Notification Name",
+    prompt: "Name of Notification",
+    contextTitle: "Create Notification",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Notification) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateNotification",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Notification",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Notification) + 1,
+    },
+  },
+  [LaravelFileType.Policy]: {
+    fileType: LaravelFileType.Policy,
+    quickPickLabel: "Policy",
+    commandName: "laravelFileCreator.createPolicy",
+    title: "New Policy",
+    placeHolder: "Policy Name",
+    prompt: "Name of Policy",
+    contextTitle: "Create Policy",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Policy) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreatePolicy",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Policy",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Policy) + 1,
+    },
+  },
+  [LaravelFileType.ResourceController]: {
+    fileType: LaravelFileType.ResourceController,
+    quickPickLabel: "Resource Controller",
+    commandName: "laravelFileCreator.createResourceController",
+    title: "New Resource Controller",
+    placeHolder: "Resource Controller Name",
+    prompt: "Name of Resource Controller",
+    contextTitle: "Create Resource Controller",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.ResourceController) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateResourceController",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Resource Controller",
+      order:
+        getEnumIndex(LaravelFileType, LaravelFileType.ResourceController) + 1,
+    },
+  },
+  [LaravelFileType.Rule]: {
+    fileType: LaravelFileType.Rule,
+    quickPickLabel: "Rule",
+    commandName: "laravelFileCreator.createRule",
+    title: "New Rule",
+    placeHolder: "Rule Name",
+    prompt: "Name of Rule",
+    contextTitle: "Create Rule",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(LaravelFileType, LaravelFileType.Rule) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    configuration: {
+      key: "laravelFileCreator.showCreateRule",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Rule",
+      order: getEnumIndex(LaravelFileType, LaravelFileType.Rule) + 1,
     },
   },
 };

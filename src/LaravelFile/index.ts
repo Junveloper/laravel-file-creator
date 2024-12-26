@@ -78,8 +78,18 @@ function convertBasenameToFileName(
       name.endsWith("Resource") ? name : `${name}Resource`,
     [LaravelFileType.JsonResourceCollection]: (name) =>
       name.endsWith("Collection") ? name : `${name}Collection`,
+    [LaravelFileType.Mailable]: (name) =>
+      name.endsWith("Mail") ? name : `${name}Mail`,
     [LaravelFileType.Model]: (name) => name,
     [LaravelFileType.Migration]: (name) => `${dateString}_${name}`,
+    [LaravelFileType.Notification]: (name) =>
+      name.endsWith("Notification") ? name : `${name}Notification`,
+    [LaravelFileType.Policy]: (name) =>
+      name.endsWith("Policy") ? name : `${name}Policy`,
+    [LaravelFileType.ResourceController]: (name) =>
+      name.endsWith("Controller") ? name : `${name}Controller`,
+    [LaravelFileType.Rule]: (name) =>
+      name.endsWith("Rule") ? name : `${name}Rule`,
   };
 
   return `${transformations[type](baseName)}.php`;

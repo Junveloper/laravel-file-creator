@@ -27,6 +27,13 @@ export default function generateLaravelFile(
       jsonCollectionResourceCode(className, namespace),
     [LaravelFileType.Model]: () => modelCode(className, namespace),
     [LaravelFileType.Migration]: () => migrationCode(),
+    [LaravelFileType.Mailable]: () => mailableCode(className, namespace),
+    [LaravelFileType.Notification]: () =>
+      notificationCode(className, namespace),
+    [LaravelFileType.Policy]: () => policyCode(className, namespace),
+    [LaravelFileType.ResourceController]: () =>
+      resourceControllerCode(className, namespace),
+    [LaravelFileType.Rule]: () => ruleCode(className, namespace),
   };
 
   return generators[type]();
@@ -272,6 +279,164 @@ ${
 class ${className} extends Model
 {
 
+}`;
+}
+
+function mailableCode(className: string, namespace?: string) {
+  if (!className.endsWith("Mail")) {
+    className += "Mail";
+  }
+
+  return `<?php
+${
+  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+}use Illuminate\\Bus\\Queueable;
+use Illuminate\\Mail\\Mailable;
+use Illuminate\\Mail\\Mailables\\Content;
+use Illuminate\\Mail\\Mailables\\Envelope;
+use Illuminate\\Queue\\SerializesModels;
+
+class ${className} extends Mailable
+{
+    use Queueable;
+    use SerializesModels;
+
+    public function __construct()
+    {
+    }
+
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: '',
+        );
+    }
+
+    public function content(): Content
+    {
+        return new Content(
+            markdown: '',
+        );
+    }
+
+    public function attachments(): array
+    {
+        return [];
+    }
+}`;
+}
+
+function notificationCode(className: string, namespace?: string) {
+  if (!className.endsWith("Notification")) {
+    className += "Notification";
+  }
+
+  return `<?php
+${
+  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+}use Illuminate\\Bus\\Queueable;
+use Illuminate\\Contracts\\Queue\\ShouldQueue;
+use Illuminate\\Notifications\\Messages\\MailMessage;
+use Illuminate\\Notifications\\Notification;
+
+class ${className} extends Notification implements ShouldQueue
+{
+    use Queueable;
+
+    public function __construct()
+    {
+    }
+
+    public function via($notifiable): array
+    {
+        return ['mail'];
+    }
+
+    public function toMail($notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
+    }
+
+    public function toArray($notifiable): array
+    {
+        return [];
+    }
+}`;
+}
+
+function policyCode(className: string, namespace?: string) {
+  if (!className.endsWith("Policy")) {
+    className += "Policy";
+  }
+
+  return `<?php
+${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}use Domain\\Users\\User;
+use Illuminate\\Auth\\Access\\HandlesAuthorization;
+
+class ${className}
+{
+    use HandlesAuthorization;
+
+    public function action(User $user): bool
+    {
+        
+    }
+}`;
+}
+
+function resourceControllerCode(className: string, namespace?: string) {
+  if (!className.endsWith("Controller")) {
+    className += "Controller";
+  }
+
+  return `<?php
+${
+  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+}use Illuminate\\Http\\Request;
+
+class ${className}
+{
+    public function index()
+    {
+        
+    }
+
+    public function store(Request $request)
+    {
+    }
+
+    public function show($id)
+    {
+    }
+
+    public function update(Request $request, $id)
+    {
+    }
+
+    public function destroy($id)
+    {
+    }
+}`;
+}
+
+function ruleCode(className: string, namespace?: string) {
+  if (!className.endsWith("Rule")) {
+    className += "Rule";
+  }
+
+  return `<?php
+${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}use Closure;
+use Illuminate\\Contracts\\Validation\\ValidationRule;
+
+class ${className} implements ValidationRule
+{
+    public function validate(string $attribute, mixed $value, Closure $fail): void
+    {
+        
+    }
 }`;
 }
 
