@@ -93,31 +93,31 @@
         "laravelFileCreator.showCreateSingleActionController": {
           "type": "boolean",
           "default": true,
-          "description": "Show in the 'New Laravel file...' menu to create a single action controller",
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a single action controller",
           "order": 1
         },
         "laravelFileCreator.showCreateFormRequest": {
           "type": "boolean",
           "default": true,
-          "description": "Show in the 'New Laravel file...' menu to create a form request",
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a form request",
           "order": 2
         },
         "laravelFileCreator.showCreateModel": {
           "type": "boolean",
           "default": true,
-          "description": "Show in the 'New Laravel file...' menu to create a model",
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a model",
           "order": 3
         },
         "laravelFileCreator.showCreateMigration": {
           "type": "boolean",
           "default": true,
-          "description": "Show in the 'New Laravel file...' menu to create a migration",
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a migration",
           "order": 4
         },
         "laravelFileCreator.omitDownMethodInMigration": {
           "type": "boolean",
           "default": true,
-          "description": "Omit the `down` method in the migration file",
+          "markdownDescription": "Omit the `down` method in the migration file",
           "order": 5
         },
         "laravelFileCreator.composerFilePath": {
