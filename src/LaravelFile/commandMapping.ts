@@ -119,7 +119,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.ConsoleCommand) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateCommand",
     configuration: {
       key: "laravelFileCreator.showCreateCommand",
       type: "boolean",
@@ -140,7 +140,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Controller) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateSingleActionController",
     configuration: {
       key: "laravelFileCreator.showCreateSingleActionController",
       type: "boolean",
@@ -161,7 +161,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Event) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateEvent",
     configuration: {
       key: "laravelFileCreator.showCreateEvent",
       type: "boolean",
@@ -182,7 +182,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.EventListener) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateEventListener",
     configuration: {
       key: "laravelFileCreator.showCreateEventListener",
       type: "boolean",
@@ -203,7 +203,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Exception) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateException",
     configuration: {
       key: "laravelFileCreator.showCreateException",
       type: "boolean",
@@ -224,7 +224,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.FormRequest) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateFormRequest",
     configuration: {
       key: "laravelFileCreator.showCreateFormRequest",
       type: "boolean",
@@ -245,7 +245,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Job) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJob",
     configuration: {
       key: "laravelFileCreator.showCreateJob",
       type: "boolean",
@@ -266,7 +266,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.JsonResource) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJsonResource",
     configuration: {
       key: "laravelFileCreator.showCreateJsonResource",
       type: "boolean",
@@ -287,7 +287,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.JsonResourceCollection) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJsonResourceCollection",
     configuration: {
       key: "laravelFileCreator.showCreateJsonResourceCollection",
       type: "boolean",
@@ -310,7 +310,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Model) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateModel",
     configuration: {
       key: "laravelFileCreator.showCreateModel",
       type: "boolean",
@@ -331,7 +331,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Migration) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMigration",
     configuration: {
       key: "laravelFileCreator.showCreateMigration",
       type: "boolean",
@@ -352,7 +352,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Mailable) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMailable",
     configuration: {
       key: "laravelFileCreator.showCreateMailable",
       type: "boolean",
@@ -373,7 +373,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Notification) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateNotification",
     configuration: {
       key: "laravelFileCreator.showCreateNotification",
       type: "boolean",
@@ -394,7 +394,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.PestTest) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreatePestTest",
     configuration: {
       key: "laravelFileCreator.showCreatePestTest",
       type: "boolean",
@@ -415,7 +415,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Policy) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreatePolicy",
     configuration: {
       key: "laravelFileCreator.showCreatePolicy",
       type: "boolean",
@@ -436,7 +436,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.ResourceController) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateResourceController",
     configuration: {
       key: "laravelFileCreator.showCreateResourceController",
       type: "boolean",
@@ -458,7 +458,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     group: `1_laravelFileCreator@${
       getEnumIndex(LaravelFileType, LaravelFileType.Rule) + 1
     }`,
-    when: "explorerResourceIsFolder && laravelFileCreator.activated",
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateRule",
     configuration: {
       key: "laravelFileCreator.showCreateRule",
       type: "boolean",

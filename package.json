@@ -156,87 +156,87 @@
         },
         {
           "command": "laravelFileCreator.createCommand",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateCommand",
           "group": "1_laravelFileCreator@4"
         },
         {
           "command": "laravelFileCreator.createSingleActionController",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateSingleActionController",
           "group": "1_laravelFileCreator@5"
         },
         {
           "command": "laravelFileCreator.createEvent",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateEvent",
           "group": "1_laravelFileCreator@6"
         },
         {
           "command": "laravelFileCreator.createEventListener",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateEventListener",
           "group": "1_laravelFileCreator@7"
         },
         {
           "command": "laravelFileCreator.createException",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateException",
           "group": "1_laravelFileCreator@8"
         },
         {
           "command": "laravelFileCreator.createFormRequest",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateFormRequest",
           "group": "1_laravelFileCreator@9"
         },
         {
           "command": "laravelFileCreator.createJob",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJob",
           "group": "1_laravelFileCreator@10"
         },
         {
           "command": "laravelFileCreator.createJsonResource",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJsonResource",
           "group": "1_laravelFileCreator@11"
         },
         {
           "command": "laravelFileCreator.createJsonResourceCollection",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJsonResourceCollection",
           "group": "1_laravelFileCreator@12"
         },
         {
           "command": "laravelFileCreator.createModel",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateModel",
           "group": "1_laravelFileCreator@15"
         },
         {
           "command": "laravelFileCreator.createMigration",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMigration",
           "group": "1_laravelFileCreator@14"
         },
         {
           "command": "laravelFileCreator.createMailable",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMailable",
           "group": "1_laravelFileCreator@13"
         },
         {
           "command": "laravelFileCreator.createNotification",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateNotification",
           "group": "1_laravelFileCreator@16"
         },
         {
           "command": "laravelFileCreator.createPestTest",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreatePestTest",
           "group": "1_laravelFileCreator@17"
         },
         {
           "command": "laravelFileCreator.createPolicy",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreatePolicy",
           "group": "1_laravelFileCreator@18"
         },
         {
           "command": "laravelFileCreator.createResourceController",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateResourceController",
           "group": "1_laravelFileCreator@19"
         },
         {
           "command": "laravelFileCreator.createRule",
-          "when": "explorerResourceIsFolder && laravelFileCreator.activated",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateRule",
           "group": "1_laravelFileCreator@20"
         },
         {
