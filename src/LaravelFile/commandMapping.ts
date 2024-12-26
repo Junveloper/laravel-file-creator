@@ -37,9 +37,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
-        "Show in the 'New Laravel file...' menu to create a blade file",
+        "Show in the 'New Laravel file...' menu to create a Blade file",
       order: 1,
     },
   },
@@ -55,9 +55,9 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     when: "explorerResourceIsFolder && phpCreateClass.activated",
     configuration: {
       type: "boolean",
-      default: true,
+      default: false,
       markdownDescription:
-        "Show in the 'New Laravel file...' menu to create a blade component class",
+        "Show in the 'New Laravel file...' menu to create a Blade Component class",
       order: 2,
     },
   },
@@ -75,7 +75,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       type: "boolean",
       default: true,
       markdownDescription:
-        "Show in the 'New Laravel file...' menu to create a single action controller",
+        "Show in the 'New Laravel file...' menu to create a single action Controller",
       order: 3,
     },
   },
@@ -93,7 +93,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       type: "boolean",
       default: true,
       markdownDescription:
-        "Show in the 'New Laravel file...' menu to create a form request",
+        "Show in the 'New Laravel file...' menu to create a Form Request",
       order: 4,
     },
   },
@@ -111,7 +111,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       type: "boolean",
       default: true,
       markdownDescription:
-        "Show in the 'New Laravel file...' menu to create a model",
+        "Show in the 'New Laravel file...' menu to create a Model",
       order: 5,
     },
   },
@@ -129,7 +129,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       type: "boolean",
       default: true,
       markdownDescription:
-        "Show in the 'New Laravel file...' menu to create a migration",
+        "Show in the 'New Laravel file...' menu to create a Migration",
       order: 6,
     },
   },

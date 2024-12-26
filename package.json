@@ -112,38 +112,38 @@
       "properties": {
         "laravelFileCreator.showCreateBladeFile": {
           "type": "boolean",
-          "default": true,
-          "markdownDescription": "Show in the 'New Laravel file...' menu to create a blade file",
+          "default": false,
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a Blade file",
           "order": 1
         },
         "laravelFileCreator.showCreateBladeComponentClass": {
           "type": "boolean",
-          "default": true,
-          "markdownDescription": "Show in the 'New Laravel file...' menu to create a blade component class",
+          "default": false,
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a Blade Component class",
           "order": 2
         },
         "laravelFileCreator.showCreateSingleActionController": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Show in the 'New Laravel file...' menu to create a single action controller",
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a single action Controller",
           "order": 3
         },
         "laravelFileCreator.showCreateFormRequest": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Show in the 'New Laravel file...' menu to create a form request",
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a Form Request",
           "order": 4
         },
         "laravelFileCreator.showCreateModel": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Show in the 'New Laravel file...' menu to create a model",
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a Model",
           "order": 5
         },
         "laravelFileCreator.showCreateMigration": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Show in the 'New Laravel file...' menu to create a migration",
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a Migration",
           "order": 6
         },
         "laravelFileCreator.omitDownMethodInMigration": {
