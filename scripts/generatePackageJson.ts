@@ -41,7 +41,6 @@ function generatePackageJsonConfig() {
   const packageJsonPath = resolve(__dirname, "../../package.json");
   const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 
-  // Create a new contributes object with commands first
   const newContributes: VSCodeContributes = {
     commands: Object.values(commandsMapping).map((command) => ({
       command: command.commandName,
