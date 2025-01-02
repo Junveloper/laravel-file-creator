@@ -380,13 +380,13 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "Omit the `down` method in the migration file",
-          "order": 7
+          "order": 21
         },
         "laravelFileCreator.composerFilePath": {
           "type": "string",
           "default": null,
           "markdownDescription": "Set `composer.json` location path (relative to project root folder)",
-          "order": 8
+          "order": 22
         }
       }
     }

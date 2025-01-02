@@ -86,13 +86,19 @@ function generatePackageJsonConfig() {
     };
   });
 
+  const lastOrderNumber = Math.max(
+    ...Object.values(commandsMapping).map(
+      (command: Command) => command.configuration.order
+    )
+  );
+
   newContributes.configuration.properties[
     "laravelFileCreator.omitDownMethodInMigration"
   ] = {
     type: "boolean",
     default: true,
     markdownDescription: "Omit the `down` method in the migration file",
-    order: 7,
+    order: lastOrderNumber + 1,
   };
 
   newContributes.configuration.properties[
@@ -102,7 +108,7 @@ function generatePackageJsonConfig() {
     default: null,
     markdownDescription:
       "Set `composer.json` location path (relative to project root folder)",
-    order: 8,
+    order: lastOrderNumber + 2,
   };
 
   packageJson.contributes = newContributes;
