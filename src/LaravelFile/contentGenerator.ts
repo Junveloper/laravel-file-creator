@@ -1,43 +1,81 @@
 import { workspace } from "vscode";
 import { camelCaseToSnakeCase, commandNameToSignature } from "../utils";
-import { LaravelFileType } from "./commandMapping";
+import { SupportedFileType } from "./commandMapping";
 
 export default function generateLaravelFile(
-  type: LaravelFileType,
+  type: SupportedFileType,
   className: string,
   namespace?: string
 ) {
-  const generators: Record<LaravelFileType, () => string> = {
-    [LaravelFileType.BladeFile]: () => bladeFileCode(),
-    [LaravelFileType.BladeComponentClass]: () =>
+  const generators: Record<SupportedFileType, () => string> = {
+    [SupportedFileType.PhpClass]: () => newPhpClassCode(className, namespace),
+    [SupportedFileType.PhpEnum]: () => newPhpEnumCode(className, namespace),
+    [SupportedFileType.PhpInterface]: () =>
+      newPhpInterfaceCode(className, namespace),
+    [SupportedFileType.PhpTrait]: () => newPhpTraitCode(className, namespace),
+    [SupportedFileType.BladeFile]: () => bladeFileCode(),
+    [SupportedFileType.BladeComponentClass]: () =>
       BladeComponentClassCode(className, namespace),
-    [LaravelFileType.Config]: () => configCode(),
-    [LaravelFileType.ConsoleCommand]: () =>
+    [SupportedFileType.Config]: () => configCode(),
+    [SupportedFileType.ConsoleCommand]: () =>
       consoleCommandCode(className, namespace),
-    [LaravelFileType.Controller]: () => controllerCode(className, namespace),
-    [LaravelFileType.Event]: () => eventCode(className, namespace),
-    [LaravelFileType.EventListener]: () =>
+    [SupportedFileType.Controller]: () => controllerCode(className, namespace),
+    [SupportedFileType.Event]: () => eventCode(className, namespace),
+    [SupportedFileType.EventListener]: () =>
       eventListenerCode(className, namespace),
-    [LaravelFileType.Exception]: () => exceptionCode(className, namespace),
-    [LaravelFileType.FormRequest]: () => formRequestCode(className, namespace),
-    [LaravelFileType.Job]: () => jobCode(className, namespace),
-    [LaravelFileType.JsonResource]: () =>
+    [SupportedFileType.Exception]: () => exceptionCode(className, namespace),
+    [SupportedFileType.FormRequest]: () =>
+      formRequestCode(className, namespace),
+    [SupportedFileType.Job]: () => jobCode(className, namespace),
+    [SupportedFileType.JsonResource]: () =>
       jsonResourceCode(className, namespace),
-    [LaravelFileType.JsonResourceCollection]: () =>
+    [SupportedFileType.JsonResourceCollection]: () =>
       jsonCollectionResourceCode(className, namespace),
-    [LaravelFileType.Model]: () => modelCode(className, namespace),
-    [LaravelFileType.Migration]: () => migrationCode(),
-    [LaravelFileType.Mailable]: () => mailableCode(className, namespace),
-    [LaravelFileType.Notification]: () =>
+    [SupportedFileType.Model]: () => modelCode(className, namespace),
+    [SupportedFileType.Migration]: () => migrationCode(),
+    [SupportedFileType.Mailable]: () => mailableCode(className, namespace),
+    [SupportedFileType.Notification]: () =>
       notificationCode(className, namespace),
-    [LaravelFileType.PestTest]: () => pestCode(),
-    [LaravelFileType.Policy]: () => policyCode(className, namespace),
-    [LaravelFileType.ResourceController]: () =>
+    [SupportedFileType.PestTest]: () => pestCode(),
+    [SupportedFileType.Policy]: () => policyCode(className, namespace),
+    [SupportedFileType.ResourceController]: () =>
       resourceControllerCode(className, namespace),
-    [LaravelFileType.Rule]: () => ruleCode(className, namespace),
+    [SupportedFileType.Rule]: () => ruleCode(className, namespace),
   };
 
   return generators[type]();
+}
+
+function newPhpClassCode(className: string, namespace?: string) {
+  return `<?php
+  ${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}class ${className}
+{
+    
+}`;
+}
+
+function newPhpEnumCode(className: string, namespace?: string) {
+  return `<?php
+  ${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}enum ${className}
+{
+    
+}`;
+}
+
+function newPhpInterfaceCode(className: string, namespace?: string) {
+  return `<?php
+  ${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}interface ${className}
+{
+    
+}`;
+}
+
+function newPhpTraitCode(className: string, namespace?: string) {
+  return `<?php
+  ${namespace ? `\nnamespace ${namespace};\n\n` : "\n"}trait ${className}
+{
+    
+}`;
 }
 
 function bladeFileCode() {

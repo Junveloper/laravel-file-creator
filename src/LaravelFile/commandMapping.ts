@@ -1,7 +1,7 @@
 import { InputBoxOptions } from "vscode";
 
 export type Command = InputBoxOptions & {
-  fileType: LaravelFileType;
+  fileType: SupportedFileType;
   quickPickLabel: string;
   commandName: string;
   contextTitle: string;
@@ -16,7 +16,11 @@ export type Command = InputBoxOptions & {
   };
 };
 
-export enum LaravelFileType {
+export enum SupportedFileType {
+  PhpClass = "PHP Class",
+  PhpEnum = "PHP Enum",
+  PhpInterface = "PHP Interface",
+  PhpTrait = "PHP Trait",
   BladeFile = "Blade File",
   BladeComponentClass = "Blade Component Class",
   Config = "Config",
@@ -43,9 +47,94 @@ function getEnumIndex(enumObj: object, value: string): number {
   return Object.values(enumObj).indexOf(value);
 }
 
-export const commandsMapping: Record<LaravelFileType, Command> = {
-  [LaravelFileType.BladeFile]: {
-    fileType: LaravelFileType.BladeFile,
+export const commandsMapping: Record<SupportedFileType, Command> = {
+  [SupportedFileType.PhpClass]: {
+    fileType: SupportedFileType.PhpClass,
+    quickPickLabel: "Class",
+    commandName: "laravelFileCreator.createClass",
+    title: "New PHP Class",
+    placeHolder: "Class Name",
+    prompt: "Name of Class",
+    contextTitle: "Create PHP Class",
+    group: `0_laravelFileCreator@${
+      getEnumIndex(SupportedFileType, SupportedFileType.PhpClass) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateClass",
+    configuration: {
+      key: "laravelFileCreator.showCreateClass",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a PHP Class",
+      order: getEnumIndex(SupportedFileType, SupportedFileType.PhpClass) + 1,
+    },
+  },
+  [SupportedFileType.PhpEnum]: {
+    fileType: SupportedFileType.PhpEnum,
+    quickPickLabel: "Enum",
+    commandName: "laravelFileCreator.createEnum",
+    title: "New PHP Enum",
+    placeHolder: "Enum Name",
+    prompt: "Name of Enum",
+    contextTitle: "Create PHP Enum",
+    group: `0_laravelFileCreator@${
+      getEnumIndex(SupportedFileType, SupportedFileType.PhpEnum) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateEnum",
+    configuration: {
+      key: "laravelFileCreator.showCreateEnum",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a PHP Enum",
+      order: getEnumIndex(SupportedFileType, SupportedFileType.PhpEnum) + 1,
+    },
+  },
+  [SupportedFileType.PhpInterface]: {
+    fileType: SupportedFileType.PhpInterface,
+    quickPickLabel: "Interface",
+    commandName: "laravelFileCreator.createInterface",
+    title: "New PHP Interface",
+    placeHolder: "Interface Name",
+    prompt: "Name of Interface",
+    contextTitle: "Create PHP Interface",
+    group: `0_laravelFileCreator@${
+      getEnumIndex(SupportedFileType, SupportedFileType.PhpInterface) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateInterface",
+    configuration: {
+      key: "laravelFileCreator.showCreateInterface",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a PHP Interface",
+      order:
+        getEnumIndex(SupportedFileType, SupportedFileType.PhpInterface) + 1,
+    },
+  },
+  [SupportedFileType.PhpTrait]: {
+    fileType: SupportedFileType.PhpTrait,
+    quickPickLabel: "Trait",
+    commandName: "laravelFileCreator.createTrait",
+    title: "New PHP Trait",
+    placeHolder: "Trait Name",
+    prompt: "Name of Trait",
+    contextTitle: "Create PHP Trait",
+    group: `0_laravelFileCreator@${
+      getEnumIndex(SupportedFileType, SupportedFileType.PhpTrait) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateTrait",
+    configuration: {
+      key: "laravelFileCreator.showCreateTrait",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a PHP Trait",
+      order: getEnumIndex(SupportedFileType, SupportedFileType.PhpTrait) + 1,
+    },
+  },
+  [SupportedFileType.BladeFile]: {
+    fileType: SupportedFileType.BladeFile,
     quickPickLabel: "Blade File",
     commandName: "laravelFileCreator.createBladeFile",
     title: "New Blade File",
@@ -53,7 +142,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Blade File (exclude .blade.php)",
     contextTitle: "Create Blade File",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.BladeFile) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.BladeFile) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateBladeFile",
     configuration: {
@@ -62,11 +151,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Blade file",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.BladeFile) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.BladeFile) + 1,
     },
   },
-  [LaravelFileType.BladeComponentClass]: {
-    fileType: LaravelFileType.BladeComponentClass,
+  [SupportedFileType.BladeComponentClass]: {
+    fileType: SupportedFileType.BladeComponentClass,
     quickPickLabel: "Blade Component Class",
     commandName: "laravelFileCreator.createBladeComponentClass",
     title: "New Blade Component Class",
@@ -74,7 +163,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Blade Component Class",
     contextTitle: "Create Blade Component Class",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.BladeComponentClass) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.BladeComponentClass) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateBladeComponentClass",
     configuration: {
@@ -84,11 +173,12 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Blade Component class",
       order:
-        getEnumIndex(LaravelFileType, LaravelFileType.BladeComponentClass) + 1,
+        getEnumIndex(SupportedFileType, SupportedFileType.BladeComponentClass) +
+        1,
     },
   },
-  [LaravelFileType.Config]: {
-    fileType: LaravelFileType.Config,
+  [SupportedFileType.Config]: {
+    fileType: SupportedFileType.Config,
     quickPickLabel: "Config File",
     commandName: "laravelFileCreator.createConfig",
     title: "New Config",
@@ -96,7 +186,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Config",
     contextTitle: "Create Config File",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Config) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Config) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateConfig",
     configuration: {
@@ -105,11 +195,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Config file",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Config) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Config) + 1,
     },
   },
-  [LaravelFileType.ConsoleCommand]: {
-    fileType: LaravelFileType.ConsoleCommand,
+  [SupportedFileType.ConsoleCommand]: {
+    fileType: SupportedFileType.ConsoleCommand,
     quickPickLabel: "Command",
     commandName: "laravelFileCreator.createCommand",
     title: "New Console Command",
@@ -117,7 +207,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Command",
     contextTitle: "Create Console Command",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.ConsoleCommand) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.ConsoleCommand) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateCommand",
     configuration: {
@@ -126,11 +216,12 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Console Command",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.ConsoleCommand) + 1,
+      order:
+        getEnumIndex(SupportedFileType, SupportedFileType.ConsoleCommand) + 1,
     },
   },
-  [LaravelFileType.Controller]: {
-    fileType: LaravelFileType.Controller,
+  [SupportedFileType.Controller]: {
+    fileType: SupportedFileType.Controller,
     quickPickLabel: "Single Action Controller",
     commandName: "laravelFileCreator.createSingleActionController",
     title: "New Single Action Controller",
@@ -138,7 +229,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Single Action Controller",
     contextTitle: "Create Single Action Controller",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Controller) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Controller) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateSingleActionController",
     configuration: {
@@ -147,11 +238,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a single action Controller",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Controller) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Controller) + 1,
     },
   },
-  [LaravelFileType.Event]: {
-    fileType: LaravelFileType.Event,
+  [SupportedFileType.Event]: {
+    fileType: SupportedFileType.Event,
     quickPickLabel: "Event",
     commandName: "laravelFileCreator.createEvent",
     title: "New Event",
@@ -159,7 +250,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Event",
     contextTitle: "Create Event",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Event) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Event) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateEvent",
     configuration: {
@@ -168,11 +259,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create an Event",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Event) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Event) + 1,
     },
   },
-  [LaravelFileType.EventListener]: {
-    fileType: LaravelFileType.EventListener,
+  [SupportedFileType.EventListener]: {
+    fileType: SupportedFileType.EventListener,
     quickPickLabel: "Event Listener",
     commandName: "laravelFileCreator.createEventListener",
     title: "New Event Listener",
@@ -180,7 +271,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Event Listener",
     contextTitle: "Create Event Listener",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.EventListener) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.EventListener) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateEventListener",
     configuration: {
@@ -189,11 +280,12 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create an Event Listener",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.EventListener) + 1,
+      order:
+        getEnumIndex(SupportedFileType, SupportedFileType.EventListener) + 1,
     },
   },
-  [LaravelFileType.Exception]: {
-    fileType: LaravelFileType.Exception,
+  [SupportedFileType.Exception]: {
+    fileType: SupportedFileType.Exception,
     quickPickLabel: "Exception",
     commandName: "laravelFileCreator.createException",
     title: "New Exception",
@@ -201,7 +293,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Exception",
     contextTitle: "Create Exception",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Exception) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Exception) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateException",
     configuration: {
@@ -210,11 +302,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create an Exception",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Exception) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Exception) + 1,
     },
   },
-  [LaravelFileType.FormRequest]: {
-    fileType: LaravelFileType.FormRequest,
+  [SupportedFileType.FormRequest]: {
+    fileType: SupportedFileType.FormRequest,
     quickPickLabel: "Form Request",
     commandName: "laravelFileCreator.createFormRequest",
     title: "New Form Request",
@@ -222,7 +314,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Form Request",
     contextTitle: "Create Form Request",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.FormRequest) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.FormRequest) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateFormRequest",
     configuration: {
@@ -231,11 +323,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Form Request",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.FormRequest) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.FormRequest) + 1,
     },
   },
-  [LaravelFileType.Job]: {
-    fileType: LaravelFileType.Job,
+  [SupportedFileType.Job]: {
+    fileType: SupportedFileType.Job,
     quickPickLabel: "Job",
     commandName: "laravelFileCreator.createJob",
     title: "New Job",
@@ -243,7 +335,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Job",
     contextTitle: "Create Job",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Job) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Job) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJob",
     configuration: {
@@ -252,11 +344,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Job",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Job) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Job) + 1,
     },
   },
-  [LaravelFileType.JsonResource]: {
-    fileType: LaravelFileType.JsonResource,
+  [SupportedFileType.JsonResource]: {
+    fileType: SupportedFileType.JsonResource,
     quickPickLabel: "JSON Resource",
     commandName: "laravelFileCreator.createJsonResource",
     title: "New JSON Resource",
@@ -264,7 +356,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of JSON Resource",
     contextTitle: "Create JSON Resource",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.JsonResource) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.JsonResource) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJsonResource",
     configuration: {
@@ -273,11 +365,12 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a JSON Resource",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.JsonResource) + 1,
+      order:
+        getEnumIndex(SupportedFileType, SupportedFileType.JsonResource) + 1,
     },
   },
-  [LaravelFileType.JsonResourceCollection]: {
-    fileType: LaravelFileType.JsonResourceCollection,
+  [SupportedFileType.JsonResourceCollection]: {
+    fileType: SupportedFileType.JsonResourceCollection,
     quickPickLabel: "JSON Resource Collection",
     commandName: "laravelFileCreator.createJsonResourceCollection",
     title: "New JSON Resource Collection",
@@ -285,7 +378,10 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of JSON Resource Collection",
     contextTitle: "Create JSON Resource Collection",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.JsonResourceCollection) + 1
+      getEnumIndex(
+        SupportedFileType,
+        SupportedFileType.JsonResourceCollection
+      ) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJsonResourceCollection",
     configuration: {
@@ -295,12 +391,14 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a JSON Resource Collection",
       order:
-        getEnumIndex(LaravelFileType, LaravelFileType.JsonResourceCollection) +
-        1,
+        getEnumIndex(
+          SupportedFileType,
+          SupportedFileType.JsonResourceCollection
+        ) + 1,
     },
   },
-  [LaravelFileType.Model]: {
-    fileType: LaravelFileType.Model,
+  [SupportedFileType.Model]: {
+    fileType: SupportedFileType.Model,
     quickPickLabel: "Model",
     commandName: "laravelFileCreator.createModel",
     title: "New Model",
@@ -308,7 +406,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Model",
     contextTitle: "Create Model",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Model) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Model) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateModel",
     configuration: {
@@ -317,11 +415,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Model",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Model) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Model) + 1,
     },
   },
-  [LaravelFileType.Migration]: {
-    fileType: LaravelFileType.Migration,
+  [SupportedFileType.Migration]: {
+    fileType: SupportedFileType.Migration,
     quickPickLabel: "Migration",
     commandName: "laravelFileCreator.createMigration",
     title: "New Migration",
@@ -329,7 +427,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Migration (use snake case)",
     contextTitle: "Create Migration",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Migration) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Migration) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMigration",
     configuration: {
@@ -338,11 +436,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Migration",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Migration) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Migration) + 1,
     },
   },
-  [LaravelFileType.Mailable]: {
-    fileType: LaravelFileType.Mailable,
+  [SupportedFileType.Mailable]: {
+    fileType: SupportedFileType.Mailable,
     quickPickLabel: "Mailable",
     commandName: "laravelFileCreator.createMailable",
     title: "New Mailable",
@@ -350,7 +448,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Mailable",
     contextTitle: "Create Mailable",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Mailable) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Mailable) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMailable",
     configuration: {
@@ -359,11 +457,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Mailable",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Mailable) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Mailable) + 1,
     },
   },
-  [LaravelFileType.Notification]: {
-    fileType: LaravelFileType.Notification,
+  [SupportedFileType.Notification]: {
+    fileType: SupportedFileType.Notification,
     quickPickLabel: "Notification",
     commandName: "laravelFileCreator.createNotification",
     title: "New Notification",
@@ -371,7 +469,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Notification",
     contextTitle: "Create Notification",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Notification) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Notification) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateNotification",
     configuration: {
@@ -380,11 +478,12 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Notification",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Notification) + 1,
+      order:
+        getEnumIndex(SupportedFileType, SupportedFileType.Notification) + 1,
     },
   },
-  [LaravelFileType.PestTest]: {
-    fileType: LaravelFileType.PestTest,
+  [SupportedFileType.PestTest]: {
+    fileType: SupportedFileType.PestTest,
     quickPickLabel: "Pest Test",
     commandName: "laravelFileCreator.createPestTest",
     title: "New Pest Test",
@@ -392,7 +491,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Pest Test",
     contextTitle: "Create Pest Test",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.PestTest) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.PestTest) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreatePestTest",
     configuration: {
@@ -401,11 +500,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: true,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Pest Test",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.PestTest) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.PestTest) + 1,
     },
   },
-  [LaravelFileType.Policy]: {
-    fileType: LaravelFileType.Policy,
+  [SupportedFileType.Policy]: {
+    fileType: SupportedFileType.Policy,
     quickPickLabel: "Policy",
     commandName: "laravelFileCreator.createPolicy",
     title: "New Policy",
@@ -413,7 +512,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Policy",
     contextTitle: "Create Policy",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Policy) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Policy) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreatePolicy",
     configuration: {
@@ -422,11 +521,11 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Policy",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Policy) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Policy) + 1,
     },
   },
-  [LaravelFileType.ResourceController]: {
-    fileType: LaravelFileType.ResourceController,
+  [SupportedFileType.ResourceController]: {
+    fileType: SupportedFileType.ResourceController,
     quickPickLabel: "Resource Controller",
     commandName: "laravelFileCreator.createResourceController",
     title: "New Resource Controller",
@@ -434,7 +533,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Resource Controller",
     contextTitle: "Create Resource Controller",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.ResourceController) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.ResourceController) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateResourceController",
     configuration: {
@@ -444,11 +543,12 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Resource Controller",
       order:
-        getEnumIndex(LaravelFileType, LaravelFileType.ResourceController) + 1,
+        getEnumIndex(SupportedFileType, SupportedFileType.ResourceController) +
+        1,
     },
   },
-  [LaravelFileType.Rule]: {
-    fileType: LaravelFileType.Rule,
+  [SupportedFileType.Rule]: {
+    fileType: SupportedFileType.Rule,
     quickPickLabel: "Rule",
     commandName: "laravelFileCreator.createRule",
     title: "New Rule",
@@ -456,7 +556,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
     prompt: "Name of Rule",
     contextTitle: "Create Rule",
     group: `1_laravelFileCreator@${
-      getEnumIndex(LaravelFileType, LaravelFileType.Rule) + 1
+      getEnumIndex(SupportedFileType, SupportedFileType.Rule) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateRule",
     configuration: {
@@ -465,7 +565,7 @@ export const commandsMapping: Record<LaravelFileType, Command> = {
       default: false,
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Rule",
-      order: getEnumIndex(LaravelFileType, LaravelFileType.Rule) + 1,
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Rule) + 1,
     },
   },
 };

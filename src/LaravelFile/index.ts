@@ -3,11 +3,11 @@ import { Uri, window } from "vscode";
 import { createFile, extractClassName, sanitizeFileName } from "../File";
 import resolveNamespace from "../Namespace";
 import { openTextDocument } from "../Workspace";
-import { commandsMapping, LaravelFileType } from "./commandMapping";
+import { commandsMapping, SupportedFileType } from "./commandMapping";
 import generateLaravelFile from "./contentGenerator";
 
 export default async function createLaravelFile(
-  type: LaravelFileType,
+  type: SupportedFileType,
   folder: Uri
 ) {
   let baseName = await getLaravelFileName(type);
@@ -33,7 +33,7 @@ export default async function createLaravelFile(
 }
 
 async function getLaravelFileName(
-  type: LaravelFileType
+  type: SupportedFileType
 ): Promise<string | undefined> {
   const name = await window.showInputBox(commandsMapping[type]);
 
@@ -45,7 +45,7 @@ async function getLaravelFileName(
 }
 
 function convertBasenameToFileName(
-  type: LaravelFileType,
+  type: SupportedFileType,
   baseName: string
 ): string {
   const now = new Date();
@@ -55,42 +55,46 @@ function convertBasenameToFileName(
     .replace(/:/g, "")
     .slice(0, -5);
 
-  const transformations: Record<LaravelFileType, (name: string) => string> = {
-    [LaravelFileType.BladeFile]: (name) => `${name}.blade`,
-    [LaravelFileType.BladeComponentClass]: (name) =>
+  const transformations: Record<SupportedFileType, (name: string) => string> = {
+    [SupportedFileType.PhpClass]: (name) => name,
+    [SupportedFileType.PhpInterface]: (name) => name,
+    [SupportedFileType.PhpTrait]: (name) => name,
+    [SupportedFileType.PhpEnum]: (name) => name,
+    [SupportedFileType.BladeFile]: (name) => `${name}.blade`,
+    [SupportedFileType.BladeComponentClass]: (name) =>
       name.endsWith("Component") ? name : `${name}Component`,
-    [LaravelFileType.Config]: (name) => name.toLowerCase(),
-    [LaravelFileType.ConsoleCommand]: (name) =>
+    [SupportedFileType.Config]: (name) => name.toLowerCase(),
+    [SupportedFileType.ConsoleCommand]: (name) =>
       name.endsWith("Command") ? name : `${name}Command`,
-    [LaravelFileType.Controller]: (name) =>
+    [SupportedFileType.Controller]: (name) =>
       name.endsWith("Controller") ? name : `${name}Controller`,
-    [LaravelFileType.Event]: (name) =>
+    [SupportedFileType.Event]: (name) =>
       name.endsWith("Event") ? name : `${name}Event`,
-    [LaravelFileType.EventListener]: (name) =>
+    [SupportedFileType.EventListener]: (name) =>
       name.endsWith("Listener") ? name : `${name}Listener`,
-    [LaravelFileType.Exception]: (name) =>
+    [SupportedFileType.Exception]: (name) =>
       name.endsWith("Exception") ? name : `${name}Exception`,
-    [LaravelFileType.FormRequest]: (name) =>
+    [SupportedFileType.FormRequest]: (name) =>
       name.endsWith("Request") ? name : `${name}Request`,
-    [LaravelFileType.Job]: (name) =>
+    [SupportedFileType.Job]: (name) =>
       name.endsWith("Job") ? name : `${name}Job`,
-    [LaravelFileType.JsonResource]: (name) =>
+    [SupportedFileType.JsonResource]: (name) =>
       name.endsWith("Resource") ? name : `${name}Resource`,
-    [LaravelFileType.JsonResourceCollection]: (name) =>
+    [SupportedFileType.JsonResourceCollection]: (name) =>
       name.endsWith("Collection") ? name : `${name}Collection`,
-    [LaravelFileType.Mailable]: (name) =>
+    [SupportedFileType.Mailable]: (name) =>
       name.endsWith("Mail") ? name : `${name}Mail`,
-    [LaravelFileType.Model]: (name) => name,
-    [LaravelFileType.Migration]: (name) => `${dateString}_${name}`,
-    [LaravelFileType.Notification]: (name) =>
+    [SupportedFileType.Model]: (name) => name,
+    [SupportedFileType.Migration]: (name) => `${dateString}_${name}`,
+    [SupportedFileType.Notification]: (name) =>
       name.endsWith("Notification") ? name : `${name}Notification`,
-    [LaravelFileType.PestTest]: (name) =>
+    [SupportedFileType.PestTest]: (name) =>
       name.endsWith("Test") ? name : `${name}Test`,
-    [LaravelFileType.Policy]: (name) =>
+    [SupportedFileType.Policy]: (name) =>
       name.endsWith("Policy") ? name : `${name}Policy`,
-    [LaravelFileType.ResourceController]: (name) =>
+    [SupportedFileType.ResourceController]: (name) =>
       name.endsWith("Controller") ? name : `${name}Controller`,
-    [LaravelFileType.Rule]: (name) =>
+    [SupportedFileType.Rule]: (name) =>
       name.endsWith("Rule") ? name : `${name}Rule`,
   };
 
