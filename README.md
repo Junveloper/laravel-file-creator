@@ -12,6 +12,10 @@ This has been inspired from one of the features from a popular PHPStorm plugin, 
 
 The following files are supported:
 
+- PHP Class
+- PHP Enum
+- PHP Interface
+- PHP Trait
 - Blade File
 - Blade Component Class
 - Config
