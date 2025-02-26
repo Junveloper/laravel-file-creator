@@ -7,6 +7,8 @@ export type Command = InputBoxOptions & {
   contextTitle: string;
   when: string;
   group: string;
+  showInCommandPalette?: boolean;
+  defaultFilePath?: string;
   configuration: {
     key: string;
     type: string;
@@ -424,12 +426,14 @@ export const commandsMapping: Record<SupportedFileType, Command> = {
     commandName: "laravelFileCreator.createMigration",
     title: "New Migration",
     placeHolder: "Migration Name",
-    prompt: "Name of Migration (use snake case)",
+    prompt: "Use snake case or separate words with spaces",
     contextTitle: "Create Migration",
     group: `1_laravelFileCreator@${
       getEnumIndex(SupportedFileType, SupportedFileType.Migration) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMigration",
+    showInCommandPalette: true,
+    defaultFilePath: "database/migrations",
     configuration: {
       key: "laravelFileCreator.showCreateMigration",
       type: "boolean",

@@ -1,14 +1,19 @@
 import path from "path";
 import { Uri, window } from "vscode";
-import { createFile, extractClassName, sanitizeFileName } from "../File";
+import {
+  createFile,
+  extractClassName,
+  resolveDefaultUriForType,
+  sanitizeFileName,
+} from "../File";
 import resolveNamespace from "../Namespace";
-import { openTextDocument } from "../Workspace";
+import { openTextDocument, promptFolderSelection } from "../Workspace";
 import { commandsMapping, SupportedFileType } from "./commandMapping";
 import generateLaravelFile from "./contentGenerator";
 
 export default async function createLaravelFile(
   type: SupportedFileType,
-  folder: Uri
+  folder?: Uri
 ) {
   let baseName = await getLaravelFileName(type);
 
@@ -16,14 +21,23 @@ export default async function createLaravelFile(
     return;
   }
 
-  baseName = sanitizeFileName(baseName);
+  const locationFolder =
+    folder ||
+    (await resolveDefaultUriForType(type)) ||
+    (await promptFolderSelection());
+
+  if (!locationFolder) {
+    return;
+  }
+
+  baseName = sanitizeFileName(baseName, type);
 
   const className = extractClassName(baseName);
 
-  const namespace = await resolveNamespace(folder.fsPath);
+  const namespace = await resolveNamespace(locationFolder.fsPath);
 
   const fileName = convertBasenameToFileName(type, baseName);
-  const filePath = folder.fsPath + path.sep + fileName;
+  const filePath = locationFolder.fsPath + path.sep + fileName;
 
   const content = generateLaravelFile(type, className, namespace);
 

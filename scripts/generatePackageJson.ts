@@ -20,6 +20,10 @@ type VSCodeContributes = {
     label: string;
   }>;
   menus: {
+    commandPalette: Array<{
+      command: string;
+      when: string;
+    }>;
     "explorer/context": Array<{
       submenu: string;
       group: string;
@@ -49,6 +53,14 @@ function generatePackageJsonConfig() {
     })),
     submenus: packageJson.contributes.submenus,
     menus: {
+      commandPalette: Object.values(commandsMapping).map(
+        (command: Command) => ({
+          command: command.commandName,
+          when: command.showInCommandPalette
+            ? "laravelFileCreator.activated"
+            : "false",
+        })
+      ),
       "explorer/context": packageJson.contributes.menus["explorer/context"],
       "laravelFileCreator.menu": Object.values(commandsMapping)
         .filter((command: Command) => command.configuration)
@@ -69,6 +81,11 @@ function generatePackageJsonConfig() {
     command: "laravelFileCreator.createLaravelFile",
     category: "Laravel File Creator",
     title: "Create Other Laravel Files...",
+  });
+
+  newContributes.menus.commandPalette.push({
+    command: "laravelFileCreator.createLaravelFile",
+    when: "false",
   });
 
   newContributes.menus["laravelFileCreator.menu"].push({

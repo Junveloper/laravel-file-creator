@@ -1,5 +1,9 @@
 import { existsSync, writeFileSync } from "fs";
-import { window } from "vscode";
+import { Uri, window, workspace } from "vscode";
+import {
+  commandsMapping,
+  SupportedFileType,
+} from "../LaravelFile/commandMapping";
 
 function createFile(filePath: string, content: string) {
   if (existsSync(filePath)) {
@@ -18,7 +22,11 @@ function removeExtension(name: string) {
   return name.split(".")[0];
 }
 
-function sanitizeFileName(name: string) {
+function sanitizeFileName(name: string, type: SupportedFileType) {
+  if (type === "Migration") {
+    return removeExtension(name.toLocaleLowerCase().replace(/\s+/g, "_"));
+  }
+
   return removeSpaces(removeExtension(name));
 }
 
@@ -26,4 +34,30 @@ function extractClassName(name: string) {
   return name.replace(/\.php+$/g, "");
 }
 
-export { createFile, extractClassName, removeExtension, sanitizeFileName };
+async function resolveDefaultUriForType(
+  type: SupportedFileType
+): Promise<Uri | undefined> {
+  const commandMapping = commandsMapping[type];
+
+  if (!commandMapping.defaultFilePath) {
+    return undefined;
+  }
+
+  const workspaceRoots = workspace.workspaceFolders;
+
+  if (!workspaceRoots || workspaceRoots.length === 0) {
+    return undefined;
+  }
+
+  const rootPath = workspaceRoots[0].uri.fsPath;
+
+  return Uri.file(`${rootPath}/${commandMapping.defaultFilePath}`);
+}
+
+export {
+  createFile,
+  extractClassName,
+  removeExtension,
+  resolveDefaultUriForType,
+  sanitizeFileName,
+};
