@@ -68,8 +68,6 @@ export default async function resolveNamespace(
     .filter((entry) => entry !== null);
 
   if (pathMatches.length === 0) {
-    window.showErrorMessage("The namespace could not be resolved.");
-
     return undefined;
   }
 
