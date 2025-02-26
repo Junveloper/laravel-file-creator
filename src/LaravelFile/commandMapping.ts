@@ -7,6 +7,7 @@ export type Command = InputBoxOptions & {
   contextTitle: string;
   when: string;
   group: string;
+  showInCommandPalette?: boolean;
   configuration: {
     key: string;
     type: string;
@@ -430,6 +431,7 @@ export const commandsMapping: Record<SupportedFileType, Command> = {
       getEnumIndex(SupportedFileType, SupportedFileType.Migration) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMigration",
+    showInCommandPalette: true,
     configuration: {
       key: "laravelFileCreator.showCreateMigration",
       type: "boolean",

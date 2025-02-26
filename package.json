@@ -158,6 +158,108 @@
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "laravelFileCreator.createClass",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createEnum",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createInterface",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createTrait",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createBladeFile",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createBladeComponentClass",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createConfig",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createCommand",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createSingleActionController",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createEvent",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createEventListener",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createException",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createFormRequest",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createJob",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createJsonResource",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createJsonResourceCollection",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createModel",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createMigration",
+          "when": "laravelFileCreator.activated"
+        },
+        {
+          "command": "laravelFileCreator.createMailable",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createNotification",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createPestTest",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createPolicy",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createResourceController",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createRule",
+          "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createLaravelFile",
+          "when": "false"
+        }
+      ],
       "explorer/context": [
         {
           "submenu": "laravelFileCreator.menu",
