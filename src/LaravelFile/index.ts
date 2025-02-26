@@ -21,23 +21,23 @@ export default async function createLaravelFile(
     return;
   }
 
-  const destinationFolder =
+  const locationFolder =
     folder ||
     (await resolveDefaultUriForType(type)) ||
     (await promptFolderSelection());
 
-  if (!destinationFolder) {
+  if (!locationFolder) {
     return;
   }
 
-  baseName = sanitizeFileName(baseName);
+  baseName = sanitizeFileName(baseName, type);
 
   const className = extractClassName(baseName);
 
-  const namespace = await resolveNamespace(destinationFolder.fsPath);
+  const namespace = await resolveNamespace(locationFolder.fsPath);
 
   const fileName = convertBasenameToFileName(type, baseName);
-  const filePath = destinationFolder.fsPath + path.sep + fileName;
+  const filePath = locationFolder.fsPath + path.sep + fileName;
 
   const content = generateLaravelFile(type, className, namespace);
 

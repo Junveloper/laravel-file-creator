@@ -22,7 +22,11 @@ function removeExtension(name: string) {
   return name.split(".")[0];
 }
 
-function sanitizeFileName(name: string) {
+function sanitizeFileName(name: string, type: SupportedFileType) {
+  if (type === "Migration") {
+    return removeExtension(name.toLocaleLowerCase().replace(/\s+/g, "_"));
+  }
+
   return removeSpaces(removeExtension(name));
 }
 

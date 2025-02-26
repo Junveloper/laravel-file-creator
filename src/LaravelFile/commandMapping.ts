@@ -426,7 +426,7 @@ export const commandsMapping: Record<SupportedFileType, Command> = {
     commandName: "laravelFileCreator.createMigration",
     title: "New Migration",
     placeHolder: "Migration Name",
-    prompt: "Name of Migration (use snake case)",
+    prompt: "Use snake case or separate words with spaces",
     contextTitle: "Create Migration",
     group: `1_laravelFileCreator@${
       getEnumIndex(SupportedFileType, SupportedFileType.Migration) + 1
