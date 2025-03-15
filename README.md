@@ -25,6 +25,7 @@ The following files are supported:
 - Event
 - Event Listener
 - Exception
+- Factory
 - Form Request
 - Job
 - JSON Resource
@@ -36,6 +37,7 @@ The following files are supported:
 - PEST Test
 - Policy
 - Rule
+- Seeder
 
 The namespace is auto-resolved through `composer.json` file.
 

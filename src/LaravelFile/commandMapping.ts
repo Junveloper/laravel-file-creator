@@ -31,6 +31,7 @@ export enum SupportedFileType {
   Event = "Event",
   EventListener = "Event Listener",
   Exception = "Exception",
+  Factory = "Factory",
   FormRequest = "Form Request",
   Job = "Job",
   JsonResource = "JSON Resource",
@@ -43,6 +44,7 @@ export enum SupportedFileType {
   Policy = "Policy",
   ResourceController = "Resource Controller",
   Rule = "Rule",
+  Seeder = "Seeder",
 }
 
 function getEnumIndex(enumObj: object, value: string): number {
@@ -305,6 +307,27 @@ export const commandsMapping: Record<SupportedFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create an Exception",
       order: getEnumIndex(SupportedFileType, SupportedFileType.Exception) + 1,
+    },
+  },
+  [SupportedFileType.Factory]: {
+    fileType: SupportedFileType.Factory,
+    quickPickLabel: "Factory",
+    commandName: "laravelFileCreator.createFactory",
+    title: "New Factory",
+    placeHolder: "Factory Name",
+    prompt: "Name of Factory",
+    contextTitle: "Create Factory",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(SupportedFileType, SupportedFileType.Factory) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateFactory",
+    configuration: {
+      key: "laravelFileCreator.showCreateFactory",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Factory",
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Factory) + 1,
     },
   },
   [SupportedFileType.FormRequest]: {
@@ -570,6 +593,27 @@ export const commandsMapping: Record<SupportedFileType, Command> = {
       markdownDescription:
         "Show in the 'New Laravel file...' menu to create a Rule",
       order: getEnumIndex(SupportedFileType, SupportedFileType.Rule) + 1,
+    },
+  },
+  [SupportedFileType.Seeder]: {
+    fileType: SupportedFileType.Seeder,
+    quickPickLabel: "Seeder",
+    commandName: "laravelFileCreator.createSeeder",
+    title: "New Seeder",
+    placeHolder: "Seeder Name",
+    prompt: "Name of Seeder",
+    contextTitle: "Create Seeder",
+    group: `1_laravelFileCreator@${
+      getEnumIndex(SupportedFileType, SupportedFileType.Seeder) + 1
+    }`,
+    when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateSeeder",
+    configuration: {
+      key: "laravelFileCreator.showCreateSeeder",
+      type: "boolean",
+      default: true,
+      markdownDescription:
+        "Show in the 'New Laravel file...' menu to create a Seeder",
+      order: getEnumIndex(SupportedFileType, SupportedFileType.Seeder) + 1,
     },
   },
 };
