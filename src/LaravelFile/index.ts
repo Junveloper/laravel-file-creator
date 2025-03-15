@@ -90,6 +90,8 @@ function convertBasenameToFileName(
       name.endsWith("Exception") ? name : `${name}Exception`,
     [SupportedFileType.FormRequest]: (name) =>
       name.endsWith("Request") ? name : `${name}Request`,
+    [SupportedFileType.Factory]: (name) =>
+      name.endsWith("Factory") ? name : `${name}Factory`,
     [SupportedFileType.Job]: (name) =>
       name.endsWith("Job") ? name : `${name}Job`,
     [SupportedFileType.JsonResource]: (name) =>
@@ -110,6 +112,8 @@ function convertBasenameToFileName(
       name.endsWith("Controller") ? name : `${name}Controller`,
     [SupportedFileType.Rule]: (name) =>
       name.endsWith("Rule") ? name : `${name}Rule`,
+    [SupportedFileType.Seeder]: (name) =>
+      name.endsWith("Seeder") ? name : `${name}Seeder`,
   };
 
   return `${transformations[type](baseName)}.php`;

@@ -24,6 +24,7 @@ export default function generateLaravelFile(
     [SupportedFileType.EventListener]: () =>
       eventListenerCode(className, namespace),
     [SupportedFileType.Exception]: () => exceptionCode(className, namespace),
+    [SupportedFileType.Factory]: () => factoryCode(className, namespace),
     [SupportedFileType.FormRequest]: () =>
       formRequestCode(className, namespace),
     [SupportedFileType.Job]: () => jobCode(className, namespace),
@@ -41,6 +42,7 @@ export default function generateLaravelFile(
     [SupportedFileType.ResourceController]: () =>
       resourceControllerCode(className, namespace),
     [SupportedFileType.Rule]: () => ruleCode(className, namespace),
+    [SupportedFileType.Seeder]: () => seederCode(className, namespace),
   };
 
   return generators[type]();
@@ -508,4 +510,47 @@ return new class extends Migration {
         : "\n\n    public function down(): void\n    {\n        \n    }"
     }
 };`;
+}
+
+function factoryCode(className: string, namespace?: string) {
+  if (!className.endsWith("Factory")) {
+    className += "Factory";
+  }
+
+  return `<?php
+${
+  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+}use Illuminate\\Database\\Eloquent\\Factories\\Factory;
+
+class ${className} extends Factory
+{
+    protected $model = '';
+
+    public function definition(): array
+    {
+        return [
+            
+        ];
+    }
+}`;
+}
+
+function seederCode(className: string, namespace?: string) {
+  if (!className.endsWith("Seeder")) {
+    className += "Seeder";
+  }
+
+  return `<?php
+${
+  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+}use Illuminate\\Database\\Seeder;
+
+class ${className} extends Seeder
+{
+    public function run()
+    {
+
+    }
+}
+  `;
 }
