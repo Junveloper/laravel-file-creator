@@ -321,6 +321,8 @@ export const commandsMapping: Record<SupportedFileType, Command> = {
       getEnumIndex(SupportedFileType, SupportedFileType.Factory) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateFactory",
+    showInCommandPalette: true,
+    defaultFilePath: "database/factories",
     configuration: {
       key: "laravelFileCreator.showCreateFactory",
       type: "boolean",
@@ -607,6 +609,8 @@ export const commandsMapping: Record<SupportedFileType, Command> = {
       getEnumIndex(SupportedFileType, SupportedFileType.Seeder) + 1
     }`,
     when: "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateSeeder",
+    showInCommandPalette: true,
+    defaultFilePath: "database/seeders",
     configuration: {
       key: "laravelFileCreator.showCreateSeeder",
       type: "boolean",

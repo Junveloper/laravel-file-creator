@@ -86,6 +86,11 @@
         "title": "Create Exception"
       },
       {
+        "command": "laravelFileCreator.createFactory",
+        "category": "Laravel File Creator",
+        "title": "Create Factory"
+      },
+      {
         "command": "laravelFileCreator.createFormRequest",
         "category": "Laravel File Creator",
         "title": "Create Form Request"
@@ -144,6 +149,11 @@
         "command": "laravelFileCreator.createRule",
         "category": "Laravel File Creator",
         "title": "Create Rule"
+      },
+      {
+        "command": "laravelFileCreator.createSeeder",
+        "category": "Laravel File Creator",
+        "title": "Create Seeder"
       },
       {
         "command": "laravelFileCreator.createLaravelFile",
@@ -208,6 +218,10 @@
           "when": "false"
         },
         {
+          "command": "laravelFileCreator.createFactory",
+          "when": "laravelFileCreator.activated"
+        },
+        {
           "command": "laravelFileCreator.createFormRequest",
           "when": "false"
         },
@@ -254,6 +268,10 @@
         {
           "command": "laravelFileCreator.createRule",
           "when": "false"
+        },
+        {
+          "command": "laravelFileCreator.createSeeder",
+          "when": "laravelFileCreator.activated"
         },
         {
           "command": "laravelFileCreator.createLaravelFile",
@@ -328,64 +346,74 @@
           "group": "1_laravelFileCreator@12"
         },
         {
+          "command": "laravelFileCreator.createFactory",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateFactory",
+          "group": "1_laravelFileCreator@13"
+        },
+        {
           "command": "laravelFileCreator.createFormRequest",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateFormRequest",
-          "group": "1_laravelFileCreator@13"
+          "group": "1_laravelFileCreator@14"
         },
         {
           "command": "laravelFileCreator.createJob",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJob",
-          "group": "1_laravelFileCreator@14"
+          "group": "1_laravelFileCreator@15"
         },
         {
           "command": "laravelFileCreator.createJsonResource",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJsonResource",
-          "group": "1_laravelFileCreator@15"
+          "group": "1_laravelFileCreator@16"
         },
         {
           "command": "laravelFileCreator.createJsonResourceCollection",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateJsonResourceCollection",
-          "group": "1_laravelFileCreator@16"
+          "group": "1_laravelFileCreator@17"
         },
         {
           "command": "laravelFileCreator.createModel",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateModel",
-          "group": "1_laravelFileCreator@19"
+          "group": "1_laravelFileCreator@20"
         },
         {
           "command": "laravelFileCreator.createMigration",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMigration",
-          "group": "1_laravelFileCreator@18"
+          "group": "1_laravelFileCreator@19"
         },
         {
           "command": "laravelFileCreator.createMailable",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateMailable",
-          "group": "1_laravelFileCreator@17"
+          "group": "1_laravelFileCreator@18"
         },
         {
           "command": "laravelFileCreator.createNotification",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateNotification",
-          "group": "1_laravelFileCreator@20"
+          "group": "1_laravelFileCreator@21"
         },
         {
           "command": "laravelFileCreator.createPestTest",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreatePestTest",
-          "group": "1_laravelFileCreator@21"
+          "group": "1_laravelFileCreator@22"
         },
         {
           "command": "laravelFileCreator.createPolicy",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreatePolicy",
-          "group": "1_laravelFileCreator@22"
+          "group": "1_laravelFileCreator@23"
         },
         {
           "command": "laravelFileCreator.createResourceController",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateResourceController",
-          "group": "1_laravelFileCreator@23"
+          "group": "1_laravelFileCreator@24"
         },
         {
           "command": "laravelFileCreator.createRule",
           "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateRule",
-          "group": "1_laravelFileCreator@24"
+          "group": "1_laravelFileCreator@25"
+        },
+        {
+          "command": "laravelFileCreator.createSeeder",
+          "when": "explorerResourceIsFolder && laravelFileCreator.activated && config.laravelFileCreator.showCreateSeeder",
+          "group": "1_laravelFileCreator@26"
         },
         {
           "command": "laravelFileCreator.createLaravelFile",
@@ -470,89 +498,101 @@
           "markdownDescription": "Show in the 'New Laravel file...' menu to create an Exception",
           "order": 12
         },
+        "laravelFileCreator.showCreateFactory": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a Factory",
+          "order": 13
+        },
         "laravelFileCreator.showCreateFormRequest": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Form Request",
-          "order": 13
+          "order": 14
         },
         "laravelFileCreator.showCreateJob": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Job",
-          "order": 14
+          "order": 15
         },
         "laravelFileCreator.showCreateJsonResource": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a JSON Resource",
-          "order": 15
+          "order": 16
         },
         "laravelFileCreator.showCreateJsonResourceCollection": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a JSON Resource Collection",
-          "order": 16
+          "order": 17
         },
         "laravelFileCreator.showCreateModel": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Model",
-          "order": 19
+          "order": 20
         },
         "laravelFileCreator.showCreateMigration": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Migration",
-          "order": 18
+          "order": 19
         },
         "laravelFileCreator.showCreateMailable": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Mailable",
-          "order": 17
+          "order": 18
         },
         "laravelFileCreator.showCreateNotification": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Notification",
-          "order": 20
+          "order": 21
         },
         "laravelFileCreator.showCreatePestTest": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Pest Test",
-          "order": 21
+          "order": 22
         },
         "laravelFileCreator.showCreatePolicy": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Policy",
-          "order": 22
+          "order": 23
         },
         "laravelFileCreator.showCreateResourceController": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Resource Controller",
-          "order": 23
+          "order": 24
         },
         "laravelFileCreator.showCreateRule": {
           "type": "boolean",
           "default": false,
           "markdownDescription": "Show in the 'New Laravel file...' menu to create a Rule",
-          "order": 24
+          "order": 25
+        },
+        "laravelFileCreator.showCreateSeeder": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show in the 'New Laravel file...' menu to create a Seeder",
+          "order": 26
         },
         "laravelFileCreator.omitDownMethodInMigration": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Omit the `down` method in the migration file",
-          "order": 25
+          "order": 27
         },
         "laravelFileCreator.composerFilePath": {
           "type": "string",
           "default": null,
           "markdownDescription": "Set `composer.json` location path (relative to project root folder)",
-          "order": 26
+          "order": 28
         }
       }
     }

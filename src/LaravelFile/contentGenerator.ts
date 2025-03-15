@@ -519,7 +519,9 @@ function factoryCode(className: string, namespace?: string) {
 
   return `<?php
 ${
-  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+  namespace
+    ? `\nnamespace ${namespace};\n\n`
+    : "\nnamespace Database\\Factories;\n\n"
 }use Illuminate\\Database\\Eloquent\\Factories\\Factory;
 
 class ${className} extends Factory
@@ -542,7 +544,9 @@ function seederCode(className: string, namespace?: string) {
 
   return `<?php
 ${
-  namespace ? `\nnamespace ${namespace};\n\n` : "\n"
+  namespace
+    ? `\nnamespace ${namespace};\n\n`
+    : "\nnamespace Database\\Seeders;\n\n"
 }use Illuminate\\Database\\Seeder;
 
 class ${className} extends Seeder
